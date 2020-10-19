@@ -1,0 +1,58 @@
+<resources>
+	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<style name="AppTheme.NoActionBar">
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+	
+	<style name="AppTheme.BorderButton" parent="Base.Widget.AppCompat.Button.Borderless">
+		<item name="android:foreground">@drawable/border</item>
+		<item name="android:background">@drawable/selectable_item_background_white</item>
+		<item name="android:elevation">3dp</item>
+		<item name="android:layout_marginStart">5dp</item>
+		<item name="android:layout_marginEnd">5dp</item>
+		<item name="android:layout_marginTop">5dp</item>
+		<item name="android:layout_marginBottom">5dp</item>
+	</style>
+	<style name="AppTheme.BorderBox">
+		<item name="android:background">@drawable/border_and_background</item>
+		<item name="android:elevation">3dp</item>
+		<item name="android:layout_marginStart">5dp</item>
+		<item name="android:layout_marginEnd">5dp</item>
+		<item name="android:layout_marginTop">5dp</item>
+		<item name="android:layout_marginBottom">5dp</item>
+	</style>
+
+	<declare-styleable name="Element_Led_checkbox">
+		<attr name="led_checked" format="boolean"/>
+		<attr name="led_color" format="enum">
+			<enum name="RED" value="0"/>
+			<enum name="GREEN" value="1"/>
+			<enum name="BLUE" value="2"/>
+		</attr>
+		<attr name="led_title" format="string"/>
+		<attr name="led_enabled" format="boolean"/>
+	</declare-styleable>
+	<declare-styleable name="Element_Vibration_checkbox">
+		<attr name="vibration_checked" format="boolean"/>
+		<attr name="vibration_strength" format="float"/>
+		<attr name="vibration_ms" format="integer"/>
+		<attr name="vibration_enabled" format="boolean"/>
+	</declare-styleable>
+	<declare-styleable name="Element_Tooltip_icon">
+		<attr name="tooltip_msg" format="string"/>
+		<attr name="tooltip_gravity" format="enum">
+			<enum name="bottom" value="0"/>
+			<enum name="top" value="1"/>
+		</attr>
+	</declare-styleable>
+</resources>

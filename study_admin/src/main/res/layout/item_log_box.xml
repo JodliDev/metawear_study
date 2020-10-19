@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/bottom_sheet"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:elevation="10dp"
+	android:background="@android:color/white"
+	app:behavior_peekHeight="40dp"
+	app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+	<TextView
+		android:id="@+id/log_header"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:paddingStart="10dp"
+		android:paddingEnd="10dp"
+		android:gravity="center"
+		android:layout_gravity="center"
+		android:textSize="15sp"
+		android:textStyle="bold"
+		android:text="@string/colon_log"
+		android:textColor="@android:color/white"
+		android:drawableStart="@drawable/ic_arrow_up_white"
+		android:background="@color/colorPrimary"
+		android:elevation="3dp"/>
+	
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/log_box"
+		android:scrollbars="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:stackFromEnd="true"
+		app:reverseLayout="true"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/item_time_text"/>
+</LinearLayout>

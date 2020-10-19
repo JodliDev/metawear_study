@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	style="@style/AppTheme.BorderBox"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+	
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="20dp">
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="15dp"
+			android:drawableStart="@drawable/ic_random_black"
+			android:text="@string/add_random_bing"
+			android:textColor="@android:color/black"
+			android:textSize="20sp"/>
+		
+		<at.jodlidev.metawear.study.Element_Time_input
+			android:id="@+id/time_picker"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"/>
+		
+		<TextView
+			android:id="@+id/only_one_info"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginBottom="10dp"
+			android:text="@string/info_only_one_randomTimer"/>
+		<TextView
+			android:id="@+id/already_exists_info"
+			android:visibility="gone"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
+			android:layout_marginTop="20dp"
+			android:layout_marginBottom="10dp"
+			android:text="@string/info_random_already_created"
+			android:textStyle="bold"/>
+		
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center">
+			
+			
+			<EditText
+				android:id="@+id/input_timeframes"
+				android:layout_width="50dp"
+				android:inputType="number"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:text="10"/>
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/number_of_timeframes"
+				android:labelFor="@id/input_timeframes"/>
+			
+			<at.jodlidev.metawear.study.Element_Tooltip_icon
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="top"
+				app:tooltip_msg="@string/tooltip_random_input_timeframes"/>
+		</LinearLayout>
+		
+		
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="20dp"
+			android:layout_gravity="center">
+			
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_gravity="center"
+				android:text="@string/colon_within"/>
+			<EditText
+				android:id="@+id/input_min"
+				android:layout_width="50dp"
+				android:inputType="number"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:text="0"/>
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="@string/token_min"
+				android:layout_gravity="center"
+				android:labelFor="@id/input_min"/>
+		</LinearLayout>
+		
+		
+		
+		<at.jodlidev.metawear.study.Element_Led_checkbox
+			android:id="@+id/led_alarm_checkbox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:led_checked="true"
+			app:led_color="BLUE"/>
+		
+		<at.jodlidev.metawear.study.Element_Vibration_checkbox
+			android:id="@+id/vibration_alarm_checkbox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:vibration_checked="true"
+			app:vibration_strength="50"
+			app:vibration_ms="2000"/>
+		
+		<CheckBox
+			android:id="@+id/log_battery_checkbox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:checked="true"
+			android:text="@string/log_battery"/>
+	</LinearLayout>
+</ScrollView>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">MetaWear Admin</string>
+	<string name="download_folder">MetaWear Admin</string>
+
+	<string name="acceleration">Acceleration</string>
+	<string name="action_anonymous_download">Simple data download</string>
+	<string name="action_debug_random">Debug randomization</string>
+	<string name="action_light_reset">Light reset device</string>
+	<string name="activate_switch">Program button</string>
+	<string name="add">Add</string>
+	<string name="add_device">Add device</string>
+	<string name="add_fixed_bing">Fixed Bing</string>
+	<string name="add_random_bing_short">Random Bing</string>
+	<string name="add_random_bing">Randomized Bing</string>
+	<string name="advanced_options">Advanced options</string>
+	<string name="battery_options">Battery</string>
+	<string name="bing">Bings</string>
+	<string name="bing_battery">Bing time and battery state</string>
+	
+	<string name="brackets_acc_configured_time">(accelerometer configured at: &lt;u&gt;%1s&lt;/u&gt;)</string>
+	<string name="brackets_switch_configured_time">(button configured at: &lt;u&gt;%1s&lt;/u&gt;)</string>
+	
+	<string name="btn_back">Back</string>
+	<string name="btn_backup">Backup</string>
+	<string name="btn_continue">View</string>
+	<string name="btn_delete_all_data">Delete all data</string>
+	<string name="btn_download_data">Download</string>
+	<string name="btn_export">Export</string>
+	<string name="btn_forward">Forward</string>
+	<string name="btn_import">Import</string>
+	<string name="btn_new">New</string>
+	<string name="btn_program_switch">Configure Button</string>
+	<string name="btn_restore">restore</string>
+	<string name="btn_save">Save</string>
+	<string name="btn_save_to_board">Save on device</string>
+	<string name="btn_test">Test</string>
+	
+	<string name="cancel">Cancel</string>
+	<string name="close">Close</string>
+	
+	<string name="colon_appBackup_title">App backup name:</string>
+	<string name="colon_battery">Battery:</string>
+	<string name="colon_battery_low_feedback">Feedback on Button press\n(at low battery level):</string>
+	<string name="colon_battery_low_threshold">Threshold: &lt;</string>
+	<string name="colon_device_info">Device Information:</string>
+	<string name="colon_device_name">Device name:</string>
+	<string name="colon_feedback_on_boot">Feedback at reboot:</string>
+	<string name="colon_feedback_when_charging">Feedback when charging:</string>
+	<string name="colon_firmware">Firmware version:</string>
+	<string name="colon_found_routes">Found data routes:</string>
+	<string name="colon_led_color">LED-Color:</string>
+	<string name="colon_led_type">LED-type:</string>
+	<string name="colon_log">Log:</string>
+	<string name="colon_log_number_feedback">Timeout-Feedback after 3 sec.:</string>
+	<string name="colon_logging">Logging:</string>
+	<string name="colon_model">Model:</string>
+	<string name="colon_repeat_after">Repeat every:</string>
+	<string name="colon_route_name">Route name:</string>
+	<string name="colon_switch_feedback">Feedback on Button press:</string>
+	<string name="colon_timeframes">Timeframes:</string>
+	<string name="colon_timestamp">Timestamp:</string>
+	<string name="colon_user_notes">Notes:</string>
+	<string name="colon_within">within:</string>
+	
+	<string name="confirm">Confirm</string>
+	
+	<string name="confirm_clear_log">This will erase all data on the device!\nProceed?</string>
+	<string name="confirm_anon_download_proceed">Only the following data-types will be saved. Any other data will be lost.</string>
+	<string name="confirm_delete_repeat">Do you want to remove this Reminder?\nAll Bings that us it, will be removed as well.</string>
+	<string name="confirm_delete_random">Do you want to remove this Random Timer?\nAll Bings that us it, will be removed as well.</string>
+	<string name="confirm_download_proceed">Downloaded data will be deleted from the device.</string>
+	<string name="confirm_proceed">Proceed?</string>
+	<string name="confirm_light_reset">This will remove all configurations on this device! (But it wont reset timestamp data for downloading old logs)\nProceed?</string>
+	<string name="confirm_reset">This will remove all configurations on this device!\nProceed?</string>
+	<string name="confirm_unknown_datatype">Some data was not categorized correctly. Please select how it should be formatted.</string>
+	<string name="confirm_unknown_datatype_not_started">(Downloading has not started yet, no data will be lost if you cancel now)</string>
+	<string name="confirm_wrong_password">This device was programmed by another phone. In order to use it, you have to reset it first.\nReset all data?</string>
+	
+	<string name="connect_to_single_device">Connect to a device</string>
+	<string name="connect_when_nearby">Connect automatically when near phone</string>
+	<string name="creating_file_format">Creating file %1s in Downloads/%2s</string>
+	<string name="current_configuration">Current configuration</string>
+	<string name="delete">Delete</string>
+	
+	<string name="desc_backup">Save all app data into an external file.</string>
+	<string name="desc_restore">Restore app data from a backup file.</string>
+	<string name="desc_connect_to_single_device">Connect to a device to check its state and change its configuration.</string>
+	<string name="desc_macro">When the device loses power (or is rebooted for any reason), its Bings and Reminders are deleted. Here you can set a warning that signals a reboot.</string>
+	<string name="desc_program_multiple_devices">Load a configuration file and automatically program multiple devices.</string>
+	
+	<string name="disconnect">Disconnect</string>
+	<string name="divide_by">\/ %1d</string>
+	<string name="enable">Enable</string>
+	<string name="enable_led">Enable LED</string>
+	<string name="enable_vibration">Vibration</string>
+	<string name="enable_repeat">Add Reminder</string>
+	<string name="enable_random">Add Random Timer</string>
+	<string name="empty_data">Clear data</string>
+	
+	<string name="error">Error&#8230;</string>
+	<string name="error_battery_route_failed">Error while establishing route to battery: %1s.</string>
+	<string name="error_cancel_bing">Bing was not created.</string>
+	<string name="error_chargeFeedback_failed">Error while creating charging-route: %1s.</string>
+	<string name="error_connection_failed">Connection failed.</string>
+	<string name="error_create_file">Could not create file!</string>
+	<string name="error_deserialization_failed">Board-state could not be retrieved. Data may be lost. Error: %1s.</string>
+	<string name="error_download_unknown">Some data had a faulty categorization. Caching now and trying again after download has finished</string>
+	<string name="error_invalid_name_length">Device name needs to be between 3 and 8 characters long.</string>
+	<string name="error_invalid_time">Invalid time.</string>
+	<string name="error_load_config_failed">Failed loading configuration.\n%1s</string>
+	<string name="error_load_backup_failed">Failed loading backup.\n%1s</string>
+	<string name="error_no_gyroModule">This device does not support Gyro-Calculations which is used for randomization.</string>
+	<string name="error_number_format">Invalid input.</string>
+	<string name="error_random_failed">Random Timer could not be set up: %1s.</string>
+	<string name="error_repeater_failed">Reminder could not be set up: %1s.</string>
+	<string name="error_save_backup_failed">Failed saving backup.\n%1s</string>
+	<string name="error_save_config_failed">Failed saving configuration.\n%1s</string>
+	<string name="error_save_data">Error: %1s.</string>
+	<string name="error_saving_macro">Failed saving Macro.\n%1s</string>
+	<string name="error_serialization_failed">Board-state could not be serialized. Data may be lost after restarting the app. Error: %1s.</string>
+	<string name="error_server_error">Server-error: %2s</string>
+	<string name="error_server_error_with_file">Server-error with file %1s: %2s</string>
+	<string name="error_TimeoutException">TimeoutException! This can mean that there was an issue with the connection (happens sometimes) or that the device is out of resources. Please try again.</string>
+	<string name="error_timer_failed">Timer could not be set up: %1s.</string>
+	<string name="error_unknown">An error occurred.</string>
+	<string name="error_upload_failed">Failed to upload file %1s. %2s.</string>
+	<string name="error_wrong_password">Wrong phone</string>
+	
+	<string name="example_url">www.example.com</string>
+	
+	<string name="info_battery_finished">Battery logic complete.</string>
+	<string name="info_battery_removed">Removed battery logic.</string>
+	<string name="info_bing_removed">Bing at %1s:%2s has been removed.</string>
+	
+	<string name="info_btn_continue">View the configuration that is stored on the phone and change it.</string>
+	<string name="info_btn_download">Download and remove all stored data from the device.</string>
+	<string name="info_btn_empty_board_log">Clear all stored data from the device.</string>
+	<string name="info_btn_load">Load a configuration file.</string>
+	<string name="info_btn_new">Reset the device and start a new configuration.</string>
+	<string name="info_btn_save">Export configurations into a file.</string>
+	<string name="info_chargeFeedback_created">Charging feedback added</string>
+	<string name="info_connected">Connected to device</string>
+	<string name="info_device_name_changed">Device name has been changed to \"%1s\".</string>
+	<string name="info_download_success">Download Completed.\nNew data: %1s.</string>
+	<string name="info_download_success_empty">Download Completed. No data was found</string>
+	<string name="info_download_update">Progress: %1d / %2d.</string>
+	<string name="info_download_identying_unknown">Identifying unknown data</string>
+	<string name="info_download_creating_switch_acc_combined">Combining Button and Acceleration data</string>
+	<string name="info_data_cleared">Data cleared.</string>
+	<string name="info_firmware_not_optimal">This device has firmware version %1s. MetaWear Admin was optimised for version %2s</string>
+	<string name="info_import_finished">Configuration was finished.</string>
+	<string name="info_macro_saved">Boot macro was created.</string>
+	<string name="info_new_bing_format">New Bing starts in %1dms. The app will then remove its wait-timer to free RAM resources on the device.</string>
+	<string name="info_no_deserialization">No previous board-state to return to.</string>
+	<string name="info_no_devices_found">No devices found. Please make sure that you have both Bluetooth and GPS enabled.</string>
+	<string name="info_no_password">This device was shut down since it was last connected!\nAll timestamps of log data that were created after the device was rebooted, will be shifted in the sense that the time difference to the time the device was rebooted is instead caclculated as the time difference to the time the device was configured.</string>
+	<string name="info_only_one_repeat">Only one repeater can be created! But it can be reused by several Bings</string>
+	<string name="info_only_one_randomTimer">The Random Options can be set only once! But they can be reused by several Bings:</string>
+	<string name="info_random_already_created">Random Options already exist. They can not be changed:</string>
+	<string name="info_random_created">Random Timer with %1dms points in times created.</string>
+	<string name="info_removed_switchRoute">Button programming removed.</string>
+	<string name="info_removed_chargeFeedback">Charging feedback removed.</string>
+	<string name="info_repeat_already_created">A Reminder already exists. It can not be changed</string>
+	<string name="info_repeat_created">Reminder created.</string>
+	<string name="info_reset_done">Device reset.</string>
+	<string name="info_server_connected_successfully">Connected!</string>
+	<string name="info_switch_macro_already_saved">A button configuration that is restored when the device reboots, can not be overwritten.</string>
+	<string name="info_switchRoute_set_up">Button is configured.</string>
+	<string name="info_timer_removed">%1s-timer has been removed.</string>
+	<string name="info_unknown_data">Found unknown data.</string>
+	<string name="info_upload_successful">%1s uploaded successfully.</string>
+	
+	<string name="led_type_blinking">Blinking</string>
+	<string name="led_type_number_of_clicks">Change color on button press</string>
+	<string name="led_type_length_of_click">Flash while pressed</string>
+	<string name="led_type_solid">Continuous flash</string>
+	<string name="log_acc">Log acceleration</string>
+	<string name="log_battery">Log timestamp and battery state</string>
+	<string name="log_length_of_click">Log length of button presses</string>
+	<string name="log_number_of_clicks">Log number of button presses</string>
+	<string name="none">None</string>
+	<string name="multiply_with">* %1d</string>
+	<string name="number_of_repeat">Number of iterations</string>
+	<string name="number_of_repeat_desc">if 0, the Reminder will be repeated indefinitely until the button is pressed.</string>
+	<string name="number_of_timeframes">possible points in time</string>
+	<string name="program_multiple_devices">Configure multiple devices</string>
+	<string name="random">Random</string>
+	<string name="relative_time_format">%1sh, %2sm</string>
+	<string name="repeat">Reminder</string>
+	<string name="restore_switch_config">Restore button configuration automatically when device reboots</string>
+	<string name="save">Save</string>
+	<string name="server_backup">Server backup</string>
+	<string name="start">Start</string>
+	
+	<string name="state_acc">Setting up route to accelerator</string>
+	<string name="state_adding_battery">Adding battery logic&#8230;</string>
+	<string name="state_bing">Setting up Bing&#8230;</string>
+	<string name="state_checking_password">Checking password&#8230;</string>
+	<string name="state_connecting">Connecting&#8230;</string>
+	<string name="state_creating_route">Creating route&#8230;</string>
+	<string name="state_loading">Loading&#8230;</string>
+	<string name="state_preparing">Preparing&#8230;</string>
+	<string name="state_random_timer">Setting up Random Timer&#8230;</string>
+	<string name="state_reconnecting">Reconnecting&#8230;</string>
+	<string name="state_reminder">Setting up Reminder&#8230;</string>
+	<string name="state_removing_battery">Removing battery logic&#8230;</string>
+	<string name="state_saving_macro">Saving Macro&#8230;</string>
+	<string name="state_started">started</string>
+	<string name="state_switch">Setting up Button&#8230;</string>
+	<string name="state_timer">Setting up Timer&#8230;</string>
+	<string name="state_waiting">waiting&#8230;</string>
+	<string name="state_uploading">Uploading&#8230;</string>
+	<string name="state_uploading_with_count">Uploading %1d files&#8230;</string>
+	
+	<string name="stop">Stop</string>
+	<string name="switch_feedback">Button</string>
+	<string name="switch_length">Button (length of button presses)</string>
+	<string name="switch_num">Button (number of button presses)</string>
+	<string name="select_device">Select a device</string>
+	<string name="switch_acc_combined">Combine data from button and acceleration into an additional file.</string>
+	<string name="time_format">%1s:%2s</string>
+	<string name="title_random">Random Timer</string>
+	
+	<string name="token_hour">h</string>
+	<string name="token_min">min</string>
+	<string name="token_ms">ms</string>
+	
+	<string name="tooltip_add_bing">A Bing fires every 24 hours indefinitely. The first cycle needs additional resources on the device to make sure that the Bing fires at the right time. These resources will be freed afterwards by connecting the app to the device after the bing has fired at least once.\n\nChanges in summer-, wintertime or timezones are NOT considered.</string>
+	<string name="tooltip_backup">Device configuration cannot be read from the device itself but have to be stored inside the app. This option allows you to move or copy all stored device configurations to another phone.</string>
+	<string name="tooltip_create_random">Only one Random Timer can be created. But it can be started by multiple Bings (just not at the same time).\n\nThe Random Timer needs a lot of RAM resources.</string>
+	<string name="tooltip_create_repeat">Only one Reminder can be created. But it can be started by multiple Bings (just not at the same time).</string>
+	<string name="tooltip_random_input_timeframes">Every time the Random Timer is started, it will choose a random point in time in the selected timeframe. The timer will end after this chosen period of time.\n\nThe chosen number of points in time does NOT influence its consumed RAM resources on the device.</string>
+	<string name="tooltip_server_backup">All downloaded data files and app data will be automatically uploaded to this server address as a backup. The \"wearable_sync.php\" script needs to be locatable at the location specified.</string>
+	<string name="tooltip_save">This file can be used to replicate the exact configuration from this device onto other devices.</string>
+	
+	<string name="unknown_data">unknown (save in HEX format)</string>
+	<string name="unknown_datatype">Unknown data type</string>
+	<string name="volt">Volt</string>
+	<string name="wait">Wait</string>
+</resources>

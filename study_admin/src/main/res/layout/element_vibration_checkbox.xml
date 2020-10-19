@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minWidth="250dp"
+	android:orientation="horizontal" >
+
+	<CheckBox
+		android:id="@+id/vib_checkbox"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:checked="true"
+		android:text="@string/enable_vibration"/>
+	<EditText
+		android:id="@+id/vib_strength"
+		android:layout_width="50dp"
+		android:inputType="number"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:text="50"/>
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="%, "
+		android:layout_gravity="center"
+		android:labelFor="@id/vib_strength"/>
+	<EditText
+		android:id="@+id/vib_ms"
+		android:layout_width="50dp"
+		android:inputType="number"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:text="1000"/>
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:text="@string/token_ms"
+		android:layout_gravity="center"
+		android:labelFor="@id/vib_strength"/>
+</LinearLayout>

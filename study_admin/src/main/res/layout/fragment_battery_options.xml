@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_marginStart="10dp"
+	android:layout_marginEnd="10dp">
+
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+		
+		<TextView
+			style="@style/AppTheme.BorderBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="5dp"
+			android:layout_marginEnd="5dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginBottom="5dp"
+			android:padding="10dp"
+			android:text="@string/colon_feedback_on_boot"
+			android:textSize="20sp"/>
+		
+		<androidx.constraintlayout.widget.ConstraintLayout
+			style="@style/AppTheme.BorderBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="15dp"
+			android:layout_marginEnd="15dp"
+			android:layout_marginTop="5dp"
+			android:layout_marginBottom="10dp"
+			android:padding="5dp">
+			
+			<at.jodlidev.metawear.study.Element_Tooltip_icon
+				android:id="@+id/boot_tooltip"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				android:layout_gravity="top"
+				android:layout_marginStart="10dp"
+				app:tooltip_msg="@string/desc_macro"/>
+			
+			<at.jodlidev.metawear.study.Element_Led_checkbox
+				android:id="@+id/boot_led_checkbox"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="20dp"
+				app:led_color="RED"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="@id/boot_tooltip"
+				app:layout_constraintTop_toTopOf="parent"/>
+			
+			<RadioGroup
+				android:id="@+id/led_type"
+				android:visibility="gone"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="10dp"
+				android:layout_marginStart="40dp"
+				android:orientation="vertical"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/boot_led_checkbox">
+				
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/colon_led_type"/>
+				
+				
+				<RadioButton
+					android:id="@+id/led_type_blinking"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:checked="true"
+					android:text="@string/led_type_blinking"/>
+				
+				<RadioButton
+					android:id="@+id/led_type_solid"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/led_type_solid"/>
+			</RadioGroup>
+			
+			<at.jodlidev.metawear.study.Element_Vibration_checkbox
+				android:id="@+id/boot_vibration_checkbox"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="20dp"
+				app:vibration_strength="100"
+				app:vibration_ms="4000"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/led_type"/>
+			
+			
+			
+			<CheckBox
+				android:id="@+id/repeat_feedback"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:layout_marginStart="20dp"
+				android:text="@string/colon_repeat_after"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/boot_vibration_checkbox"/>
+			
+			<EditText
+				android:id="@+id/input_hour"
+				android:layout_width="50dp"
+				android:inputType="number"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:text="1"
+				app:layout_constraintLeft_toRightOf="@id/repeat_feedback"
+				app:layout_constraintTop_toTopOf="@id/repeat_feedback"
+				app:layout_constraintBottom_toBottomOf="@id/repeat_feedback"/>
+			<TextView
+				android:id="@+id/label_hour"
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="@string/token_hour"
+				android:layout_gravity="center"
+				android:labelFor="@id/input_hour"
+				app:layout_constraintLeft_toRightOf="@id/input_hour"
+				app:layout_constraintTop_toTopOf="@id/repeat_feedback"
+				app:layout_constraintBottom_toBottomOf="@id/repeat_feedback"/>
+			<EditText
+				android:id="@+id/input_min"
+				android:layout_width="50dp"
+				android:inputType="number"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:text="0"
+				app:layout_constraintLeft_toRightOf="@id/label_hour"
+				app:layout_constraintTop_toTopOf="@id/repeat_feedback"
+				app:layout_constraintBottom_toBottomOf="@id/repeat_feedback"/>
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="@string/token_min"
+				android:layout_gravity="center"
+				android:labelFor="@id/input_min"
+				app:layout_constraintLeft_toRightOf="@id/input_min"
+				app:layout_constraintTop_toTopOf="@id/repeat_feedback"
+				app:layout_constraintBottom_toBottomOf="@id/repeat_feedback"/>
+			
+			
+			<Button
+				style="@style/Widget.AppCompat.Button.Borderless"
+				android:id="@+id/btn_boot_save"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="10dp"
+				android:padding="10dp"
+				android:layout_gravity="center"
+				android:text="@string/btn_save_to_board"
+				android:drawableStart="@drawable/ic_program_board_black"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintRight_toRightOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/repeat_feedback"/>
+		</androidx.constraintlayout.widget.ConstraintLayout>
+		
+		
+		<TextView
+			style="@style/AppTheme.BorderBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:layout_marginStart="5dp"
+			android:layout_marginEnd="5dp"
+			android:layout_marginBottom="5dp"
+			android:padding="10dp"
+			android:text="@string/colon_feedback_when_charging"
+			android:textSize="20sp"/>
+		<FrameLayout
+			android:id="@+id/charge_feedback_box"
+			style="@style/AppTheme.BorderBox"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="15dp"
+			android:layout_marginEnd="15dp"
+			android:layout_marginTop="5dp"
+			android:layout_marginBottom="10dp">
+			
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:padding="5dp"
+				android:orientation="vertical">
+				
+				
+				<CheckBox
+					android:id="@+id/charge_enabled"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					android:text="@string/enable"/>
+				
+				<at.jodlidev.metawear.study.Element_Led_checkbox
+					android:id="@+id/charge_led_checkbox"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					app:led_color="GREEN"/>
+				
+				<at.jodlidev.metawear.study.Element_Vibration_checkbox
+					android:id="@+id/charge_vibration_checkbox"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="20dp"
+					app:vibration_strength="50"
+					app:vibration_ms="1000"/>
+				
+				<Button
+					style="@style/Widget.AppCompat.Button.Borderless"
+					android:id="@+id/btn_charge_save"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="10dp"
+					android:padding="10dp"
+					android:layout_gravity="center"
+					android:text="@string/btn_save_to_board"
+					android:drawableStart="@drawable/ic_program_board_black"/>
+			</LinearLayout>
+		</FrameLayout>
+	</LinearLayout>
+</ScrollView>

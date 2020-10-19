@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	style="@style/AppTheme.BorderBox"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+	
+	<LinearLayout
+		android:orientation="vertical"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="20dp">
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="15dp"
+			android:drawableStart="@drawable/ic_bing_black"
+			android:text="@string/add_fixed_bing"
+			android:textColor="@android:color/black"
+			android:textSize="20sp"/>
+		
+		<at.jodlidev.metawear.study.Element_Time_input
+			android:id="@+id/time_picker"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"/>
+		
+		<at.jodlidev.metawear.study.Element_Led_checkbox
+			android:id="@+id/led_alarm_checkbox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:led_checked="true"
+			app:led_color="BLUE"/>
+		
+		<at.jodlidev.metawear.study.Element_Vibration_checkbox
+			android:id="@+id/vibration_alarm_checkbox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:vibration_checked="true"
+			app:vibration_strength="50"
+			app:vibration_ms="2000"/>
+		
+		<CheckBox
+			android:id="@+id/log_battery_checkbox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:checked="true"
+			android:text="@string/log_battery"/>
+	
+	
+	</LinearLayout>
+</ScrollView>

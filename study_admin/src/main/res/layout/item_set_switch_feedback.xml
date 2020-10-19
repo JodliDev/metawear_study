@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	style="@style/AppTheme.BorderBox"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="10dp">
+	<LinearLayout
+		android:id="@+id/box_feedback"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:animateLayoutChanges="true">
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/colon_switch_feedback"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:layout_margin="10dp"/>
+		
+		
+		<at.jodlidev.metawear.study.Element_Vibration_checkbox
+			android:id="@+id/vibration_checkbox"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:vibration_strength="50"
+			app:vibration_ms="200"
+			android:layout_marginStart="20dp"/>
+		
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:layout_marginStart="30dp">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@android:color/black"
+				android:text="@string/colon_led_color"/>
+			<Spinner
+				android:id="@+id/led_color"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:entries="@array/led_colors"/>
+		</LinearLayout>
+		
+		<RadioGroup
+			android:id="@+id/enable_led_box"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp">
+			<RadioButton
+				android:id="@+id/led_type_blinking"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/led_type_blinking"/>
+			<RadioButton
+				android:id="@+id/led_type_length_of_click"
+				android:visibility="gone"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/led_type_length_of_click"/>
+			<RadioButton
+				android:id="@+id/led_type_number_of_clicks"
+				android:visibility="gone"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/led_type_number_of_clicks"/>
+			
+			<!--<RadioGroup-->
+				<!--android:id="@+id/log_number_of_clicks_num_box"-->
+				<!--android:layout_width="match_parent"-->
+				<!--android:layout_height="wrap_content"-->
+				<!--android:layout_marginStart="20dp"-->
+				<!--android:orientation="horizontal">-->
+				<!--<TextView-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content"-->
+					<!--android:textColor="@android:color/black"-->
+					<!--android:text="@string/colon_max_num_clicks"/>-->
+				<!---->
+				<!---->
+				<!--<RadioButton-->
+					<!--android:id="@+id/log_number_of_clicks_num3"-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content"-->
+					<!--android:checked="true"-->
+					<!--android:text="@string/num_3"/>-->
+				<!---->
+				<!--<RadioButton-->
+					<!--android:id="@+id/log_number_of_clicks_num6"-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content"-->
+					<!--android:text="@string/num_6"/>-->
+				<!---->
+				<!--<at.jodlidev.metawear.study.Element_Tooltip_icon-->
+					<!--android:id="@+id/visualize_button_tooltip"-->
+					<!--android:layout_width="wrap_content"-->
+					<!--android:layout_height="wrap_content"-->
+					<!--android:layout_gravity="top"-->
+					<!--android:layout_marginStart="10dp"-->
+					<!--app:tooltip_msg="@string/tooltip_visualize_button_and_number_of_clicks"/>-->
+			<!--</RadioGroup>-->
+		</RadioGroup>
+		
+		
+		
+		<TextView
+			android:id="@+id/number_timeout_header"
+			android:visibility="gone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:layout_marginTop="20dp"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"
+			android:layout_marginBottom="10dp"
+			android:text="@string/colon_log_number_feedback"/>
+		
+		<at.jodlidev.metawear.study.Element_Vibration_checkbox
+			android:id="@+id/number_timeout_vibration_checkbox"
+			android:visibility="gone"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:vibration_strength="50"
+			app:vibration_ms="200"
+			android:layout_marginStart="20dp"/>
+		
+		<at.jodlidev.metawear.study.Element_Led_checkbox
+			android:id="@+id/number_timeout_led_checkbox"
+			android:visibility="gone"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="20dp"
+			app:led_color="RED"/>
+	</LinearLayout>
+
+
+</ScrollView>

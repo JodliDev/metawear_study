@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	tools:context="at.jodlidev.metawear.study.Activity_Main">
+
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbarlayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/AppTheme.AppBarOverlay">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?android:attr/actionBarSize"
+			android:background="@color/colorPrimary"
+			app:title="@string/select_device"/>
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<!--<fragment-->
+		<!--android:id="@+id/scanner_fragment"-->
+		<!--android:name="com.mbientlab.bletoolbox.scanner.BleScannerFragment"-->
+		<!--android:layout_below="@id/appbarlayout"-->
+		<!--tools:layout="@layout/blescan_device_list"-->
+		<!--android:layout_width="match_parent"-->
+		<!--android:layout_height="match_parent"-->
+		<!--android:layout_margin="15dp"/>-->
+	<fragment
+		android:id="@+id/scanner_fragment"
+		android:name="at.jodlidev.metawear.study.Fragment_Touch_BleScanner"
+		android:layout_below="@id/appbarlayout"
+		tools:layout="@layout/blescan_device_list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_margin="15dp"/>
+</RelativeLayout>

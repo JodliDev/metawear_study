@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/AppTheme.BorderBox"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical">
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/colon_logging"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:layout_margin="10dp"/>
+	
+	
+	<CheckBox
+		android:id="@+id/log_acc_checkbox"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/log_acc"
+		android:layout_marginStart="20dp"/>
+	
+	<RadioGroup
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical"
+		android:layout_marginStart="20dp">
+		<RadioButton
+			android:id="@+id/log_number_of_clicks"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/log_number_of_clicks"/>
+		
+		<RadioButton
+			android:id="@+id/log_length_of_click"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/log_length_of_click"/>
+	</RadioGroup>
+</LinearLayout>

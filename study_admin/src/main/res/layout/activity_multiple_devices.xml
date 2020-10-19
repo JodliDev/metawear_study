@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context="at.jodlidev.metawear.study.Activity_SingleDevice">
+
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:id="@+id/appbarlayout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/AppTheme.AppBarOverlay">
+
+		<androidx.appcompat.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="?attr/colorPrimary"
+			app:title="@string/program_multiple_devices"
+			app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/connected_devices_list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_marginBottom="40dp"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior"
+		app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+		tools:listitem="@layout/item_board"/>
+	
+	
+	<include
+		layout="@layout/item_loading_screen"/>
+	<include
+		layout="@layout/item_log_box"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

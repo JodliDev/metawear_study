@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:minWidth="250dp"
+	android:orientation="horizontal">
+
+	<CheckBox
+		android:id="@+id/item_led_checkbox"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:checked="true"
+		android:text="@string/enable_led"/>
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+	<Spinner
+		android:id="@+id/spinner_color"
+		android:layout_width="wrap_content"
+		android:layout_marginStart="10dp"
+		android:gravity="start"
+		android:textAlignment="textStart"
+		android:layout_height="wrap_content" />
+</LinearLayout>

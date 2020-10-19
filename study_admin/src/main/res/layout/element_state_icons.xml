@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:orientation="horizontal"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:layout_gravity="center"
+	android:paddingStart="5dp"
+	android:paddingEnd="5dp">
+	<TextView
+		android:id="@+id/time"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="15:30"
+		android:textSize="30sp"
+		android:textStyle="bold"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintTop_toTopOf="parent"/>
+	
+	<TextView
+		android:id="@+id/time_separator"
+		android:visibility="gone"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text=" - "
+		android:textSize="30sp"
+		android:textStyle="bold"
+		app:layout_constraintLeft_toRightOf="@id/time"
+		app:layout_constraintTop_toTopOf="parent"/>
+	
+	<TextView
+		android:id="@+id/time_end"
+		android:visibility="gone"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		tools:text="15:30"
+		android:textSize="30sp"
+		android:textStyle="bold"
+		app:layout_constraintLeft_toRightOf="@id/time_separator"
+		app:layout_constraintTop_toTopOf="parent"/>
+	
+	<TextView
+		android:id="@+id/time_extra"
+		android:visibility="gone"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginEnd="10dp"
+		android:textSize="15sp"
+		android:textStyle="bold"
+		app:layout_constraintLeft_toLeftOf="@id/time"
+		app:layout_constraintRight_toRightOf="@id/time"
+		app:layout_constraintTop_toBottomOf="@id/time"/>
+	
+	<TableLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="10dp"
+		app:layout_constraintLeft_toRightOf="@id/time_end"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent">
+		<TableRow>
+			<ImageView
+				android:id="@+id/vibration_state"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/ic_vibration_black"
+				android:tint="@color/colorAccent"/>
+			<ImageView
+				android:id="@+id/led_state"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/ic_lightbulb_black"/>
+			<ImageView
+				android:id="@+id/battery_state"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/ic_battery_full_black"
+				android:tint="@color/colorAccent"/>
+		</TableRow>
+		<TableRow>
+			<ImageView
+				android:id="@+id/repeat_state"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/ic_repeat_black"
+				android:tint="@color/colorAccent"/>
+			<ImageView
+				android:id="@+id/random_state"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:srcCompat="@drawable/ic_random_black"
+				android:tint="@color/colorAccent"/>
+		</TableRow>
+	</TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
