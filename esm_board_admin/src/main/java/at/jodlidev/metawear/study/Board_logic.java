@@ -1424,40 +1424,14 @@ public class Board_logic {
 	private Task<Route> create_acc_route(Switch_route route) {
 		update_progress(R.string.state_acc);
 		
-//		accelerometerModule.configure()
-//				.odr(4f)		// 4 datapoints per second
-//				.range(4f)		// Set data range to +/-4g, or closet valid range
-//				.commit();
-//
-//		return accelerometerModule.acceleration().addRouteAsync((RouteComponent source) -> {
-//			source.log(Downloader.create_subscriber(Download_formatter.ACC));
-//			source.react((DataToken token) -> {
-//				accelerometerModule.stop();
-//				accelerometerModule.acceleration().stop();
-//				if(route.log_switch_data == Switch_route.LOG_NUMBER_OF_CLICKS) {
-//					start_switchCountTimer(route);
-//				}
-//
-//				//basic feedback or warn if battery is too low:
-//				if(board_data.battery.battery_for_switch)
-//					check_battery();
-//				else
-//					basic_switch_feedback(route);
-//			});
-//		})
-		
-		
-		
 		accelerometerModule.configure()
-				.odr(40f) //datapoints per second
-				.range(4f)
+				.odr(4f)		// 4 datapoints per second
+				.range(4f)		// Set data range to +/-4g, or closet valid range
 				.commit();
 
 		return accelerometerModule.acceleration().addRouteAsync((RouteComponent source) -> {
-			RouteComponent average = source.lowpass((byte)10);
-			average.name("accAverage");
-			average.log(Downloader.create_subscriber(Download_formatter.ACC));
-			average.react((DataToken token) -> {
+			source.log(Downloader.create_subscriber(Download_formatter.ACC));
+			source.react((DataToken token) -> {
 				accelerometerModule.stop();
 				accelerometerModule.acceleration().stop();
 				if(route.log_switch_data == Switch_route.LOG_NUMBER_OF_CLICKS) {
@@ -1469,9 +1443,35 @@ public class Board_logic {
 					check_battery();
 				else
 					basic_switch_feedback(route);
-				dataprocessorModule.edit("accAverage", DataProcessor.AverageEditor.class).reset();
 			});
 		})
+		
+		
+		
+//		accelerometerModule.configure()
+//				.odr(40f) //datapoints per second
+//				.range(4f)
+//				.commit();
+//
+//		return accelerometerModule.acceleration().addRouteAsync((RouteComponent source) -> {
+//			RouteComponent average = source.lowpass((byte)10);
+//			average.name("accAverage");
+//			average.log(Downloader.create_subscriber(Download_formatter.ACC));
+//			average.react((DataToken token) -> {
+//				accelerometerModule.stop();
+//				accelerometerModule.acceleration().stop();
+//				if(route.log_switch_data == Switch_route.LOG_NUMBER_OF_CLICKS) {
+//					start_switchCountTimer(route);
+//				}
+//
+//				//basic feedback or warn if battery is too low:
+//				if(board_data.battery.battery_for_switch)
+//					check_battery();
+//				else
+//					basic_switch_feedback(route);
+//				dataprocessorModule.edit("accAverage", DataProcessor.AverageEditor.class).reset();
+//			});
+//		})
 				.continueWithTask((Task<Route> acc_task) -> {
 			if(acc_task.isFaulted())
 				throw acc_task.getError();

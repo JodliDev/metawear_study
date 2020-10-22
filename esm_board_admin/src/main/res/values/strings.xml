@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">MetaWear Admin</string>
-	<string name="download_folder">MetaWear Admin</string>
+	<string name="app_name">ESM Board Admin</string>
+	<string name="download_folder">ESM Board Admin</string>
 
 	<string name="acceleration">Acceleration</string>
 	<string name="action_anonymous_download">Simple data download</string>
@@ -148,7 +148,7 @@
 	<string name="info_download_identying_unknown">Identifying unknown data</string>
 	<string name="info_download_creating_switch_acc_combined">Combining Button and Acceleration data</string>
 	<string name="info_data_cleared">Data cleared.</string>
-	<string name="info_firmware_not_optimal">This device has firmware version %1s. MetaWear Admin was optimised for version %2s</string>
+	<string name="info_firmware_not_optimal">This device has firmware version %1s. ESM Board Admin was optimised for version %2s</string>
 	<string name="info_import_finished">Configuration was finished.</string>
 	<string name="info_macro_saved">Boot macro was created.</string>
 	<string name="info_new_bing_format">New Bing starts in %1dms. The app will then remove its wait-timer to free RAM resources on the device.</string>
