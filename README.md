@@ -1,4 +1,4 @@
-# MetaWear admin
+# ESM Board Admin
 **Please note: This projext is still in its infancy. The wiki is not up to date and the app itself is still in internal developement and testing phase.
 This should change in early 2021.**
 
