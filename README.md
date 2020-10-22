@@ -7,7 +7,7 @@ It is mainly used and tested with the [MetaMotion R](https://mbientlab.com/metam
 
 For more information, you can look at our project page:
 
-https://www.kl.ac.at/department-psychologie-und-psychodynamik/psychologische-methodenlehre/projekte
+https://www.kl.ac.at/en/department-psychology-and-psychodynamics/psychological-methodology/projects
 
 or watch our indroduction video:
 
