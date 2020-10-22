@@ -6,7 +6,9 @@ MetaWear Admin is a tool for using [mbientlab](https://mbientlab.com/) MetaWear 
 It is mainly used and tested with the [MetaMotion R](https://mbientlab.com/metamotionr/).
 
 For more information, you can look at our project page:
+
 https://www.kl.ac.at/department-psychologie-und-psychodynamik/psychologische-methodenlehre/projekte
 
 or watch our indroduction video:
+
 https://www.kl.ac.at/sites/default/files/video/versuch1_2.mp4
