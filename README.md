@@ -10,3 +10,7 @@ https://www.kl.ac.at/en/department-psychology-and-psychodynamics/psychological-m
 or watch our indroduction video:
 
 https://www.kl.ac.at/sites/default/files/video/versuch1_2.mp4
+
+You can find the working app in Google Play Store:
+
+https://play.google.com/store/apps/details?id=at.jodlidev.metawear.study
