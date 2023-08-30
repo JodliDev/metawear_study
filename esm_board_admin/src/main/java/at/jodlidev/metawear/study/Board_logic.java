@@ -299,6 +299,7 @@ public class Board_logic {
 		sql.remove_bootMacros(board_data);
 		sql.remove_feedbackMacros(board_data);
 		sql.reset_board(board_data);
+		
 		progress.update_ui();
 		
 		
@@ -306,7 +307,9 @@ public class Board_logic {
 		
 //		show_progress(R.string.state_resetting
 //		return debugModule.resetAsync().continueWithTask(task -> remove_all_macros()).continueWith(task -> {
-		return reconnect(create_new_board).continueWith(task -> {
+		return clear_board_log().continueWithTask(task ->
+				reconnect(create_new_board)
+		).continueWith(task -> {
 			loadModules();
 			logModule.start(false);
 			save_state();
@@ -1359,6 +1362,7 @@ public class Board_logic {
 						
 						save_state();
 						
+						//TODO: create a message that asks the user if data should be deleted
 //						if(route.log_switch_data != Switch_route.LOG_SWITCH_NONE || route.log_acc_data)  //TODO: disabled
 //							clear_board_log(); //it is likely that we just created a log-entry by recording the macro
 						

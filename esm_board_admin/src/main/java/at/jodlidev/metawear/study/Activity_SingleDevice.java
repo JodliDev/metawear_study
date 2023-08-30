@@ -158,7 +158,7 @@ public class Activity_SingleDevice extends AppCompatActivity implements ServiceC
 						.setCancelable(true)
 						.setDismissOnClick(true)
 						.setTextColor(Color.WHITE)
-						.setBackgroundColor(R.color.colorAccent);
+						.setBackgroundColor(activity.getColor(R.color.colorAccent));
 			}
 			else {
 				log_tooltip.setText(text);
@@ -277,17 +277,6 @@ public class Activity_SingleDevice extends AppCompatActivity implements ServiceC
 //					((Fragment_DeviceSetup) f).download();
 //				}
 //				return true;
-			case R.id.action_light_reset:
-				new AlertDialog.Builder(this)
-						.setTitle(R.string.confirm)
-						.setMessage(R.string.confirm_reset)
-						.setIcon(R.drawable.ic_warning_black)
-						.setPositiveButton(android.R.string.yes, (DialogInterface dialog, int whichButton) -> {
-							logic.reset_board(false);
-							goto_site(Communication.SITE_CONFIGURATION);
-						})
-						.setNegativeButton(android.R.string.no, null).show();
-				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}

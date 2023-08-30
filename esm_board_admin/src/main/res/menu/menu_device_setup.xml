@@ -12,14 +12,4 @@
 		android:orderInCategory="3"
 		android:title="@string/action_debug_random"
 		app:showAsAction="never" />
-	<!--<item-->
-		<!--android:id="@+id/action_different_download"-->
-		<!--android:orderInCategory="3"-->
-		<!--android:title="@string/action_anonymous_download"-->
-		<!--app:showAsAction="never" />-->
-	<item
-		android:id="@+id/action_light_reset"
-		android:orderInCategory="3"
-		android:title="@string/action_light_reset"
-		app:showAsAction="never" />
 </menu>

@@ -29,7 +29,7 @@ import at.jodlidev.metawear.study.data.Repeat;
 import at.jodlidev.metawear.study.data.Switch_route;
 
 /**
- * Created by david on 02.04.18.
+ * Created by JodliDev on 02.04.18.
  */
 
 public class SQLite extends SQLiteOpenHelper {

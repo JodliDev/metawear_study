@@ -35,13 +35,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import androidx.core.app.ActivityCompat;
 import at.jodlidev.metawear.study.data.DataBox;
 import at.jodlidev.metawear.study.data.Switch_route;
 import bolts.Task;
 
-public class Fragment_DeviceSetup extends FragmentBase implements Serializable, View.OnClickListener {
+public class Fragment_DeviceSetup extends FragmentBase implements Serializable {
 	private final static int INTENT_EXPORT_CONFIG = 10;
 	private final static int INTENT_IMPORT_CONFIG = 11;
 	private static final int REQUEST_PERMISSION = 101;
@@ -143,22 +144,61 @@ public class Fragment_DeviceSetup extends FragmentBase implements Serializable, 
 		//
 		
 		//new
-		rootView.findViewById(R.id.btn_new).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_new).setOnClickListener((View view) ->
+			new AlertDialog.Builder(getActivity())
+					.setTitle(R.string.confirm)
+					.setMessage(R.string.confirm_reset)
+					.setIcon(R.drawable.ic_warning_black)
+					.setPositiveButton(android.R.string.yes, (DialogInterface dialog, int whichButton) -> {
+						logic.reset_board(true);
+						((Communication) Objects.requireNonNull(getActivity())).goto_site(Communication.SITE_CONFIGURATION);
+					})
+					.setNegativeButton(android.R.string.no, null).show()
+		);
 		
 		//continue
-		rootView.findViewById(R.id.btn_continue).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_continue).setOnClickListener((View view) ->
+				((Communication) Objects.requireNonNull(getActivity())).goto_site(Communication.SITE_CONFIGURATION)
+		);
 		
 		//empty log
-		rootView.findViewById(R.id.btn_empty_board_log).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_empty_board_log).setOnClickListener((View view) ->
+				new AlertDialog.Builder(getActivity())
+						.setTitle(R.string.confirm)
+						.setMessage(R.string.confirm_clear_log)
+						.setIcon(R.drawable.ic_warning_black)
+						.setPositiveButton(android.R.string.yes, (DialogInterface dialog, int whichButton) -> {
+							logic.clear_board_log();
+						})
+						.setNegativeButton(android.R.string.no, null).show()
+		);
 		
 		//download
-		rootView.findViewById(R.id.btn_download).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_download).setOnClickListener((View view) -> {
+			Context context = getContext();
+			if(context == null)
+				return;
+			if(ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+				requestPermissions(new String[]{
+								Manifest.permission.READ_EXTERNAL_STORAGE,
+								Manifest.permission.WRITE_EXTERNAL_STORAGE
+						},
+						REQUEST_PERMISSION);
+				return;
+			}
+			
+			anon_download();
+		});
 		
 		//load
-		rootView.findViewById(R.id.btn_load).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_load).setOnClickListener((View view) ->
+				CONSTANTS.open_file(this, "*/*", INTENT_IMPORT_CONFIG)
+		);
 		
 		//save
-		rootView.findViewById(R.id.btn_save).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_save).setOnClickListener((View view) ->
+				CONSTANTS.create_file(this, INTENT_EXPORT_CONFIG, "application/json", logic.board_data.mac+".json")
+		);
 		
 		
 		//
@@ -170,7 +210,7 @@ public class Fragment_DeviceSetup extends FragmentBase implements Serializable, 
 		
 		//firmware
 		logic.board.readDeviceInformationAsync().continueWith((Task<DeviceInformation> task) -> {
-			getActivity().runOnUiThread(() -> {
+			Objects.requireNonNull(getActivity()).runOnUiThread(() -> {
 				Activity activity = getActivity();
 				if(activity == null)
 					return;
@@ -250,58 +290,6 @@ public class Fragment_DeviceSetup extends FragmentBase implements Serializable, 
 ////			logic.log_battery();
 //			bug3(logic.board);
 //		});
-	}
-	
-	@Override
-	public void onClick(View view) {
-		switch(view.getId()) {
-			case R.id.btn_new:
-				new AlertDialog.Builder(getActivity())
-						.setTitle(R.string.confirm)
-						.setMessage(R.string.confirm_reset)
-						.setIcon(R.drawable.ic_warning_black)
-						.setPositiveButton(android.R.string.yes, (DialogInterface dialog, int whichButton) -> {
-							logic.reset_board(true);
-							((Communication) getActivity()).goto_site(Communication.SITE_CONFIGURATION);
-						})
-						.setNegativeButton(android.R.string.no, null).show();
-				break;
-			case R.id.btn_continue:
-				((Communication) getActivity()).goto_site(Communication.SITE_CONFIGURATION);
-				break;
-			case R.id.btn_empty_board_log:
-				new AlertDialog.Builder(getActivity())
-						.setTitle(R.string.confirm)
-						.setMessage(R.string.confirm_clear_log)
-						.setIcon(R.drawable.ic_warning_black)
-						.setPositiveButton(android.R.string.yes, (DialogInterface dialog, int whichButton) -> {
-							logic.clear_board_log();
-						})
-						.setNegativeButton(android.R.string.no, null).show();
-				break;
-			case R.id.btn_download:
-				Context context = getContext();
-				if(context == null)
-					return;
-				if(ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-					requestPermissions(new String[]{
-									Manifest.permission.READ_EXTERNAL_STORAGE,
-									Manifest.permission.WRITE_EXTERNAL_STORAGE
-							},
-							REQUEST_PERMISSION);
-					return;
-				}
-				
-				anon_download();
-				break;
-			case R.id.btn_load:
-				CONSTANTS.open_file(this, "*/*", INTENT_IMPORT_CONFIG);
-				break;
-			case R.id.btn_save:
-				CONSTANTS.create_file(this, INTENT_EXPORT_CONFIG, "application/json", logic.board_data.mac+".json");
-				
-				break;
-		}
 	}
 	
 	@Override

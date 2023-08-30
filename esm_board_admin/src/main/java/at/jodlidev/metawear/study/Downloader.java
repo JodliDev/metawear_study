@@ -86,6 +86,10 @@ public class Downloader {
 		return true;
 	}
 	
+	//we are using anonymous routes now. So this is not needed anymore.
+	//But we keep it in case we ever want to go back.
+	//Maybe if mbientlab ever answers our questions about anonymous routes...
+	// see: https://mbientlab.com/community/discussion/3346/drawbacks-of-anonymous-routes-for-downloading-data
 	static Subscriber create_subscriber(final int identifier) {
 		return null;
 //		return (Data data, Object... env) -> {
