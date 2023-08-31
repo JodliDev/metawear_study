@@ -18,6 +18,7 @@
 		<activity
 			android:label="@string/app_name"
 			android:name="at.jodlidev.metawear.study.Activity_Main"
+			android:exported="true"
 			android:theme="@style/AppTheme.NoActionBar">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
