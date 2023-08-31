@@ -8,13 +8,9 @@ import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.Log;
 
-import com.mbientlab.metawear.AsyncDataProducer;
-import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.DataToken;
-import com.mbientlab.metawear.ForcedDataProducer;
 import com.mbientlab.metawear.MetaWearBoard;
 import com.mbientlab.metawear.Route;
-import com.mbientlab.metawear.Subscriber;
 import com.mbientlab.metawear.android.BtleService;
 import com.mbientlab.metawear.builder.RouteComponent;
 import com.mbientlab.metawear.builder.filter.Comparison;
@@ -23,7 +19,6 @@ import com.mbientlab.metawear.builder.function.Function2;
 import com.mbientlab.metawear.module.Accelerometer;
 import com.mbientlab.metawear.module.DataProcessor;
 import com.mbientlab.metawear.module.Debug;
-import com.mbientlab.metawear.module.Gpio;
 import com.mbientlab.metawear.module.GyroBmi160;
 import com.mbientlab.metawear.module.Haptic;
 import com.mbientlab.metawear.module.Led;
@@ -43,7 +38,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import at.jodlidev.metawear.study.data.Battery;
-import at.jodlidev.metawear.study.data.Bing;
+import at.jodlidev.metawear.study.data.Ping;
 import at.jodlidev.metawear.study.data.Board_data;
 import at.jodlidev.metawear.study.data.BootMacro;
 import at.jodlidev.metawear.study.data.ChargeFeedback;
@@ -80,7 +75,7 @@ public class Board_logic {
 	private Macro macroModule;
 	DataProcessor dataprocessorModule;
 	Settings settingsModule;
-	GyroBmi160 gyroModule; //its existence needs to be checked in Fragment_Bing
+	GyroBmi160 gyroModule; //its existence needs to be checked in Fragment_Ping
 	
 	private Context context;
 	private BtleService.LocalBinder binder;
@@ -468,13 +463,13 @@ public class Board_logic {
 					else
 						instructions.add(new Switch_route(reader));
 					break;
-				case Bing.TABLE:
+				case Ping.TABLE:
 					if(reader.peek() == JsonToken.NULL)
 						reader.skipValue();
 					else {
 						reader.beginArray();
 						while(reader.hasNext()) {
-							instructions.add(new Bing(reader));
+							instructions.add(new Ping(reader));
 						}
 						reader.endArray();
 					}
@@ -532,10 +527,10 @@ public class Board_logic {
 //						return set_up_switch_route((Switch_route) obj, get_battery());
 //					});
 //					break;
-//				case DataBox.TYPE_BING:
+//				case DataBox.TYPE_PING:
 //					task.continueWithTask((newtask) -> {
-//						Log.d("progress", "bing" + Boolean.toString(newtask.isCompleted()));
-//						return add_bing((Bing) obj);
+//						Log.d("progress", "ping" + Boolean.toString(newtask.isCompleted()));
+//						return add_ping((Ping) obj);
 //					});
 //					break;
 //				case DataBox.TYPE_MACRO:
@@ -558,7 +553,7 @@ public class Board_logic {
 							battery = (Battery) obj;
 							task = Task.forResult(null);
 							break;
-						case DataBox.TYPE_SWITCH: //has to be before repeat, random and bing because battery has not be saved to db yet
+						case DataBox.TYPE_SWITCH: //has to be before repeat, random and ping because battery has not be saved to db yet
 							Switch_route route = (Switch_route) obj;
 							task = set_up_switch_route(route, battery, route.restore_on_boot); //this will save battery to db - it cannot be saved before that or nothing will change
 							break;
@@ -568,8 +563,8 @@ public class Board_logic {
 						case DataBox.TYPE_RANDOM:
 							task = add_random((RandomTimer) obj);
 							break;
-						case DataBox.TYPE_BING:
-							task = add_bing((Bing) obj);
+						case DataBox.TYPE_PING:
+							task = add_ping((Ping) obj);
 							break;
 						case DataBox.TYPE_MACRO:
 							task = add_bootMacro((BootMacro) obj);
@@ -656,8 +651,8 @@ public class Board_logic {
 //						case DataBox.TYPE_SWITCH:
 //							set_up_switch_route((Switch_route) obj, battery);
 //							break;
-//						case DataBox.TYPE_BING:
-//							add_bing((Bing) obj);
+//						case DataBox.TYPE_PING:
+//							add_ping((Ping) obj);
 //							break;
 //						case DataBox.TYPE_MACRO:
 //							add_bootMacro((BootMacro) obj);
@@ -845,7 +840,7 @@ public class Board_logic {
 		String identifier = dataBox.led + dataBox.color
 							+ dataBox.vibration + dataBox.vibration_strength + dataBox.vibration_ms
 							+ dataBox.repeat + dataBox.random
-							+ (dataBox.battery_logging && board_data.battery.battery_for_bing) + board_data.battery.battery_for_switch;
+							+ (dataBox.battery_logging && board_data.battery.battery_for_ping) + board_data.battery.battery_for_switch;
 		
 		FeedbackMacro f = new FeedbackMacro(board_data, identifier);
 		
@@ -874,7 +869,7 @@ public class Board_logic {
 					gyroModule.start();
 				}
 				
-				if(dataBox.battery_logging && board_data.battery.battery_for_bing) {
+				if(dataBox.battery_logging && board_data.battery.battery_for_ping) {
 					log_battery();
 				}
 			}
@@ -1019,13 +1014,13 @@ public class Board_logic {
 			return Task.forResult(null);
 	}
 	
-	Task<?> init_battery_forBing(boolean new_battery_for_bing) {
-		if(new_battery_for_bing && !board_data.battery.battery_for_bing) {
+	Task<?> init_battery_forPing(boolean new_battery_for_ping) {
+		if(new_battery_for_ping && !board_data.battery.battery_for_ping) {
 			show_progress(R.string.state_adding_battery);
 			Battery battery = get_battery();
-			battery.battery_for_bing = true;
+			battery.battery_for_ping = true;
 			
-			return settingsModule.battery().addRouteAsync(source -> source.limit(Passthrough.COUNT, (short) 0).name(ROUTE_BATTERY_LOG).log(Downloader.create_subscriber(Download_formatter.BING_BATTERY)))
+			return settingsModule.battery().addRouteAsync(source -> source.limit(Passthrough.COUNT, (short) 0).name(ROUTE_BATTERY_LOG).log(Downloader.create_subscriber(Download_formatter.PING_BATTERY)))
 					.continueWith((Task<Route> task) -> {
 						progress.update_ui();
 						
@@ -1035,7 +1030,7 @@ public class Board_logic {
 						}
 						else {
 							Route main_result = task.getResult();
-//							main_result.setEnvironment(0, Download_formatter.BING_BATTERY);
+//							main_result.setEnvironment(0, Download_formatter.PING_BATTERY);
 							
 							battery.battery_log_identifier = main_result.generateIdentifier(0);
 							battery.battery_route_id = main_result.id();
@@ -1069,9 +1064,9 @@ public class Board_logic {
 		sql.save_battery(board_data, new Battery());
 		log(R.string.info_battery_removed);
 	}
-	private void remove_battery_for_bing_if_needed() {
-		if(!has_bings_with_battery_logging()) {
-			board_data.battery.battery_for_bing = false; //no bings have battery anymore - so we remove
+	private void remove_battery_for_ping_if_needed() {
+		if(!has_pings_with_battery_logging()) {
+			board_data.battery.battery_for_ping = false; //no pings have battery anymore - so we remove
 			
 			Route route = board.lookupRoute(board_data.battery.battery_route_id);
 			if(route != null)
@@ -1083,7 +1078,7 @@ public class Board_logic {
 	}
 	
 	private void remove_battery_logic() {
-		if(board_data.battery.battery_for_switch || board_data.battery.battery_for_bing) {
+		if(board_data.battery.battery_for_switch || board_data.battery.battery_for_ping) {
 			Route route = board.lookupRoute(board_data.battery.battery_route_id);
 			if(route != null)
 				route.remove();
@@ -1094,14 +1089,14 @@ public class Board_logic {
 	}
 	
 	void log_battery() {
-		if(board_data.battery.battery_for_bing) {
+		if(board_data.battery.battery_for_ping) {
 //			if(board_data.battery.battery_for_switch) //this limiter only exists when switch also reacts to battery - OLD
 				dataprocessorModule.edit(ROUTE_BATTERY_LOG, DataProcessor.PassthroughEditor.class).set((short) 1);
 			settingsModule.battery().read();
 		}
 	}
 	void check_battery() {
-//		if(board_data.battery.battery_for_bing) //this limiter only exists when battery also logs the bing - OLD
+//		if(board_data.battery.battery_for_ping) //this limiter only exists when battery also logs the ping - OLD
 			dataprocessorModule.edit(ROUTE_BATTERY_REACT, DataProcessor.PassthroughEditor.class).set((short) 1);
 		settingsModule.battery().read();
 	}
@@ -1151,7 +1146,7 @@ public class Board_logic {
 				
 				String identifier = "btn_" + route.led_behaviour + route.color + route.vibration + route.vibration_strength + route.vibration_ms
 									+ route.log_switch_data + route.log_acc_data
-									+ board_data.battery.battery_for_switch + board_data.battery.battery_for_bing;
+									+ board_data.battery.battery_for_switch + board_data.battery.battery_for_ping;
 				
 				return create_unique_feedbackMacro(identifier, () -> {
 					
@@ -1187,7 +1182,7 @@ public class Board_logic {
 					
 					
 					
-					//stop repeater of current bing:
+					//stop repeater of current ping:
 					
 //					if(repeat != null) {
 //						Timer.ScheduledTask repeat_task = timerModule.lookupScheduledTask(((byte) repeat.id_timer));
@@ -1532,11 +1527,11 @@ public class Board_logic {
 	
 	
 	//*****
-	//Bing
+	//Ping
 	//*****
-	private boolean has_bings_with_battery_logging() {
-		List<Bing> bings = sql.get_bings_with(board_data, "battery_logging", true);
-		if(bings == null) {
+	private boolean has_pings_with_battery_logging() {
+		List<Ping> pings = sql.get_pings_with(board_data, "battery_logging", true);
+		if(pings == null) {
 			RandomTimer random = sql.get_randomTimer(board_data);
 			Repeat repeat = sql.get_repeat(board_data);
 			return (random != null && random.battery_logging) && (repeat != null && repeat.battery_logging);
@@ -1545,10 +1540,10 @@ public class Board_logic {
 			return false;
 	}
 	private void remove_all_with_battery_logging() {
-		List<Bing> bings = sql.get_bings_with(board_data, "battery_logging", true);
+		List<Ping> pings = sql.get_pings_with(board_data, "battery_logging", true);
 		
-		for(int i = bings.size() - 1; i >= 0; --i) {
-			remove_bing( bings.get(i));
+		for(int i = pings.size() - 1; i >= 0; --i) {
+			remove_ping( pings.get(i));
 		}
 		
 		RandomTimer random = get_randomTimer();
@@ -1560,35 +1555,35 @@ public class Board_logic {
 			remove_repeat();
 	}
 	
-	Task<Route> add_bing(Bing bing) {
+	Task<Route> add_ping(Ping ping) {
 		show_progress(R.string.state_waiting);
 		
-		return init_battery_forBing(bing.battery_logging).continueWithTask(task -> {
-			return init_generic_feedbackMacro(bing, get_repeat());
+		return init_battery_forPing(ping.battery_logging).continueWithTask(task -> {
+			return init_generic_feedbackMacro(ping, get_repeat());
 		}).continueWithTask((Task<Byte> task) -> {//24h loop timer
 			if(task.isFaulted())
 				throw task.getError();
 			
-			update_progress(R.string.state_bing);
+			update_progress(R.string.state_ping);
 			
 			final byte macro_id = task.getResult();
 			
 			return timerModule.scheduleAsync(86400000, false, () -> {
 				macroModule.execute(macro_id);
 				
-//				if(bing.led) {
-//					pulseLed(bing.color);
+//				if(ping.led) {
+//					pulseLed(ping.color);
 //				}
 //
-//				if(bing.vibration)
-//					vibrationModule.startMotor(bing.vibration_strength, bing.vibration_ms);
+//				if(ping.vibration)
+//					vibrationModule.startMotor(ping.vibration_strength, ping.vibration_ms);
 //
-//				if(bing.repeat && repeat != null) {
+//				if(ping.repeat && repeat != null) {
 //					Timer.ScheduledTask repeat_task = timerModule.lookupScheduledTask(((byte) repeat.id_timer));
 //					repeat_task.start();
 //				}
 //
-//				if(bing.random) {
+//				if(ping.random) {
 //					gyroModule.angularVelocity().start();
 //					gyroModule.start();
 //				}
@@ -1601,18 +1596,18 @@ public class Board_logic {
 				throw loopTask.getError();
 			else {
 				final Timer.ScheduledTask scheduledTask_loop = loopTask.getResult();
-				bing.id_loop = scheduledTask_loop.id();
+				ping.id_loop = scheduledTask_loop.id();
 				
 				
 				//
 				//creating wait timer (can be removed after loop-timer has started)
 				//
-				return timerModule.scheduleAsync(bing.countdown, (short) 1, true, scheduledTask_loop::start);
+				return timerModule.scheduleAsync(ping.countdown, (short) 1, true, scheduledTask_loop::start);
 			}
 		}).continueWith(wait_Task -> { //concluding configurations
 			if(wait_Task.isFaulted()) {
 				error(R.string.error_timer_failed, wait_Task.getError());
-				remove_bing(bing);
+				remove_ping(ping);
 				end_progress();
 				throw wait_Task.getError();
 			}
@@ -1620,35 +1615,35 @@ public class Board_logic {
 				final Timer.ScheduledTask scheduledTask_wait = wait_Task.getResult();
 				scheduledTask_wait.start();
 				
-				bing.id_wait = scheduledTask_wait.id();
-				sql.add_bing(board_data, bing);
+				ping.id_wait = scheduledTask_wait.id();
+				sql.add_ping(board_data, ping);
 				save_state();
 				
 				progress.update_ui();
-				log(context.getString(R.string.info_new_bing_format, bing.countdown));
+				log(context.getString(R.string.info_new_ping_format, ping.countdown));
 			}
 			end_progress();
 			return null;
 		});
 	}
 	
-	void remove_bing(Bing bing) {
-		Timer.ScheduledTask waiter = timerModule.lookupScheduledTask(((byte) bing.id_wait));
-		Timer.ScheduledTask loop = timerModule.lookupScheduledTask(((byte) bing.id_loop));
+	void remove_ping(Ping ping) {
+		Timer.ScheduledTask waiter = timerModule.lookupScheduledTask(((byte) ping.id_wait));
+		Timer.ScheduledTask loop = timerModule.lookupScheduledTask(((byte) ping.id_loop));
 		
 		if(waiter != null)
 			waiter.remove();
 		if(loop != null)
 			loop.remove();
 		
-		String hour = bing.hour < 10 ? "0"+bing.hour : Integer.toString(bing.hour);
-		String min = bing.min < 10 ? "0"+bing.min : Integer.toString(bing.min);
-		log(context.getString(R.string.info_bing_removed, hour, min));
+		String hour = ping.hour < 10 ? "0"+ping.hour : Integer.toString(ping.hour);
+		String min = ping.min < 10 ? "0"+ping.min : Integer.toString(ping.min);
+		log(context.getString(R.string.info_ping_removed, hour, min));
 		
-		sql.remove_bing(bing);
+		sql.remove_ping(ping);
 		
-		if(bing.battery_logging)
-			remove_battery_for_bing_if_needed();
+		if(ping.battery_logging)
+			remove_battery_for_ping_if_needed();
 		
 		save_state();
 		
@@ -1657,23 +1652,23 @@ public class Board_logic {
 	
 	
 	
-	List<Bing> get_bings() {
-		return sql.get_bings(board_data);
+	List<Ping> get_pings() {
+		return sql.get_pings(board_data);
 	}
 	
 	
 	//*****
-	//Bing-waiter
+	//Ping-waiter
 	//*****
-	void remove_waitingTimer(Bing bing) {
-		Timer.ScheduledTask waiter = timerModule.lookupScheduledTask(((byte) bing.id_wait));
+	void remove_waitingTimer(Ping ping) {
+		Timer.ScheduledTask waiter = timerModule.lookupScheduledTask(((byte) ping.id_wait));
 		
 		if(waiter != null && waiter.isActive()) {
 			log(context.getString(R.string.info_timer_removed, context.getString(R.string.wait)));
-			bing.timer.removeCallbacksAndMessages(null);
-			bing.timer = null;
-			bing.id_wait = -1;
-			sql.update_wait(bing);
+			ping.timer.removeCallbacksAndMessages(null);
+			ping.timer = null;
+			ping.id_wait = -1;
+			sql.update_wait(ping);
 			waiter.remove();
 			save_state();
 			load_state(); //Workaround: for some reason the state is now faulty (downloading data will fail until next reconnect) - but the saved state seems to be ok
@@ -1693,7 +1688,7 @@ public class Board_logic {
 			gyroModule.angularVelocity().stop();
 		});
 		RouteComponent timed_value = source.split().index(0);
-		timed_value.limit(Passthrough.COUNT, (short) 1).name("random_value"); //this value is set once in the beginning and decides how many "counts" are needed until bing fires
+		timed_value.limit(Passthrough.COUNT, (short) 1).name("random_value"); //this value is set once in the beginning and decides how many "counts" are needed until ping fires
 //		RouteComponent stripped_value = timed_value.count().name("random_counter").map(Function2.ADD, "random_value").map(Function2.MULTIPLY, 1000).map(Function1.ABS_VALUE).map(Function2.MODULUS, part_num);
 		RouteComponent stripped_value = timed_value.count().name("random_counter").map(Function2.ADD, "random_value").map(Function2.MODULUS, part_num);
 		
@@ -1720,7 +1715,7 @@ public class Board_logic {
 		
 		show_progress(R.string.state_waiting);
 		remove_random();
-		return init_battery_forBing(random.battery_logging).continueWithTask(task -> { //timer for timeframe (which starts the gyroModule)
+		return init_battery_forPing(random.battery_logging).continueWithTask(task -> { //timer for timeframe (which starts the gyroModule)
 			
 			return timerModule.scheduleAsync(countdown, (short) 1, true, () -> {
 				gyroModule.angularVelocity().start();
@@ -1780,7 +1775,7 @@ public class Board_logic {
 //						})
 //						.to().split().index(0).multicast()
 //
-//						.to().limit(Passthrough.COUNT, (short) 1).name("random_value") //this value is set in the beginning and decides how many "counts" are needed until bing fires
+//						.to().limit(Passthrough.COUNT, (short) 1).name("random_value") //this value is set in the beginning and decides how many "counts" are needed until ping fires
 //						.to().count().name("random_counter")
 //						.map(Function2.ADD, "random_value").map(Function1.ABS_VALUE).map(Function2.MODULUS, 10).multicast()
 //
@@ -1844,9 +1839,9 @@ public class Board_logic {
 			
 			sql.remove_random(board_data);
 			
-			List<Bing> bings = sql.get_bings_with(board_data, "random", true);
-			for(int i = bings.size() - 1; i >= 0; --i) {
-				remove_bing(bings.get(i));
+			List<Ping> pings = sql.get_pings_with(board_data, "random", true);
+			for(int i = pings.size() - 1; i >= 0; --i) {
+				remove_ping(pings.get(i));
 			}
 			
 			
@@ -1854,7 +1849,7 @@ public class Board_logic {
 			
 			
 			if(randomTimer.battery_logging)
-				remove_battery_for_bing_if_needed();
+				remove_battery_for_ping_if_needed();
 			
 			save_state();
 			progress.update_ui();
@@ -1875,7 +1870,7 @@ public class Board_logic {
 		
 		final int countdown = repeat.min*60*1000;
 		
-		return init_battery_forBing(repeat.battery_logging).continueWithTask(task -> {
+		return init_battery_forPing(repeat.battery_logging).continueWithTask(task -> {
 			if(task.isFaulted())
 				throw task.getError();
 			return init_generic_feedbackMacro(repeat, get_repeat());
@@ -1961,16 +1956,16 @@ public class Board_logic {
 			sql.remove_repeat(board_data);
 			progress.update_ui();
 			
-			List<Bing> bings = sql.get_bings_with(board_data, "repeat", true);
-			for(int i = bings.size() - 1; i >= 0; --i) {
-				remove_bing(bings.get(i));
+			List<Ping> pings = sql.get_pings_with(board_data, "repeat", true);
+			for(int i = pings.size() - 1; i >= 0; --i) {
+				remove_ping(pings.get(i));
 			}
 			RandomTimer random = sql.get_randomTimer(board_data);
 			if(random != null && random.repeat)
 				remove_random();
 			
 			if(repeat.battery_logging)
-				remove_battery_for_bing_if_needed();
+				remove_battery_for_ping_if_needed();
 			
 			save_state();
 			progress.update_ui();

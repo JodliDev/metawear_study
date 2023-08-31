@@ -433,9 +433,9 @@ public class Fragment_DeviceSetup extends FragmentBase implements Serializable {
 			}
 			
 			if(logic.board_data.battery.battery_log_identifier == null)
-				anon_identifier_types.put("battery", Download_formatter.BING_BATTERY);
+				anon_identifier_types.put("battery", Download_formatter.PING_BATTERY);
 			else
-				anon_identifier_types.put(logic.board_data.battery.battery_log_identifier, Download_formatter.BING_BATTERY);
+				anon_identifier_types.put(logic.board_data.battery.battery_log_identifier, Download_formatter.PING_BATTERY);
 			
 			//
 			//iterating all download-routes on the board

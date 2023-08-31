@@ -6,8 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.util.JsonReader;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,7 +17,7 @@ import java.util.Calendar;
  * Created by david on 03.04.18.
  */
 
-public class Bing extends DataBox_forFeedback {
+public class Ping extends DataBox_forFeedback {
 	public static final String TABLE = "bings";
 	public static final String KEY_REMOVE_WAIT_TIMESTAMP = "remove_wait_timestamp";
 	public static final String KEY_ID_WAIT = "id_wait";
@@ -55,7 +53,7 @@ public class Bing extends DataBox_forFeedback {
 	
 	public boolean exists_on_board = true;
 	
-	public Bing(int _hour, int _min, boolean _random, boolean _repeat, boolean _battery_logging, boolean _led, String _color, boolean _vibration, float _vibration_strength, short _vibration_ms) {
+	public Ping(int _hour, int _min, boolean _random, boolean _repeat, boolean _battery_logging, boolean _led, String _color, boolean _vibration, float _vibration_strength, short _vibration_ms) {
 		hour = _hour;
 		min = _min;
 		random = _random;
@@ -69,7 +67,7 @@ public class Bing extends DataBox_forFeedback {
 		
 		calc_wait_countdown();
 	}
-	public Bing(Cursor c) {
+	public Ping(Cursor c) {
 		sqlId = c.getLong(0);
 		remove_wait_timestamp = c.getLong(1);
 		hour = c.getInt(2);
@@ -89,7 +87,7 @@ public class Bing extends DataBox_forFeedback {
 		calc_wait_countdown();
 	}
 	
-	public Bing(JsonReader reader) throws IOException {
+	public Ping(JsonReader reader) throws IOException {
 		reader.beginObject();
 		while(reader.hasNext()) {
 			switch(reader.nextName()) {
@@ -146,7 +144,7 @@ public class Bing extends DataBox_forFeedback {
 		values.put(KEY_ID_WAIT, id_wait);
 		values.put(KEY_ID_LOOP, id_loop);
 		
-		sqlId = db.insert(Bing.TABLE, null, values);
+		sqlId = db.insert(Ping.TABLE, null, values);
 	}
 	public void set_to_not_exist(Board_data board_data, SQLiteDatabase db) {
 		ContentValues values = new ContentValues();
@@ -197,6 +195,6 @@ public class Bing extends DataBox_forFeedback {
 	
 	@Override
 	public int get_type() {
-		return TYPE_BING;
+		return TYPE_PING;
 	}
 }

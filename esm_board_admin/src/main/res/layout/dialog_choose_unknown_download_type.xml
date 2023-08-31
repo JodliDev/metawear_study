@@ -82,10 +82,10 @@
 					android:layout_height="wrap_content"
 					android:text="@string/switch_num"/>
 				<RadioButton
-					android:id="@+id/bing_battery"
+					android:id="@+id/ping_battery"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="@string/bing_battery"/>
+					android:text="@string/ping_battery"/>
 				<RadioButton
 					android:id="@+id/unknown"
 					android:layout_width="match_parent"

@@ -18,7 +18,7 @@ import java.util.Calendar;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import at.jodlidev.metawear.study.data.Bing;
+import at.jodlidev.metawear.study.data.Ping;
 import at.jodlidev.metawear.study.data.RandomTimer;
 import at.jodlidev.metawear.study.data.Repeat;
 import bolts.Task;
@@ -27,17 +27,17 @@ import bolts.Task;
  * Created by JodliDev on 24.03.18.
  */
 
-public class Dialog_newBing extends Dialog {
+public class Dialog_newPing extends Dialog {
 	public static class OwnPagerAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
 		
-		private final static int PAGE_BING = 0;
+		private final static int PAGE_PING = 0;
 		private final static int PAGE_REPEAT = 1;
 		
 		private int PAGES_NUM = 2;
 		
 		private Activity activity;
 		private Board_logic logic;
-		private Bing bing;
+		private Ping ping;
 		private Repeat repeat;
 		private RandomTimer randomTimer;
 		
@@ -47,10 +47,10 @@ public class Dialog_newBing extends Dialog {
 		private boolean isRandom;
 		private boolean random_already_created;
 		
-		private Element_Time_input bing_time_picker;
-		private Element_Led_checkbox bing_led_alarm_checkbox;
-		private Element_Vibration_checkbox bing_vibration_alarm_checkbox;
-		private CheckBox bing_log_battery_checkbox;
+		private Element_Time_input ping_time_picker;
+		private Element_Led_checkbox ping_led_alarm_checkbox;
+		private Element_Vibration_checkbox ping_vibration_alarm_checkbox;
+		private CheckBox ping_log_battery_checkbox;
 		
 		private EditText random_input_min;
 		private EditText random_input_timeframes;
@@ -87,15 +87,15 @@ public class Dialog_newBing extends Dialog {
 			View view;
 			switch(position) {
 				default:
-				case PAGE_BING:
+				case PAGE_PING:
 					if(isRandom) {
-						view = inflater.inflate(R.layout.item_bing_dialog_set_random, container, false);
+						view = inflater.inflate(R.layout.item_ping_dialog_set_random, container, false);
 						
-						bing_time_picker = view.findViewById(R.id.time_picker);
-						bing_time_picker.init(activity);
-						bing_led_alarm_checkbox = view.findViewById(R.id.led_alarm_checkbox);
-						bing_vibration_alarm_checkbox = view.findViewById(R.id.vibration_alarm_checkbox);
-						bing_log_battery_checkbox = view.findViewById(R.id.log_battery_checkbox);
+						ping_time_picker = view.findViewById(R.id.time_picker);
+						ping_time_picker.init(activity);
+						ping_led_alarm_checkbox = view.findViewById(R.id.led_alarm_checkbox);
+						ping_vibration_alarm_checkbox = view.findViewById(R.id.vibration_alarm_checkbox);
+						ping_log_battery_checkbox = view.findViewById(R.id.log_battery_checkbox);
 						
 						random_input_min = view.findViewById(R.id.input_min);
 						random_input_timeframes = view.findViewById(R.id.input_timeframes);
@@ -105,13 +105,13 @@ public class Dialog_newBing extends Dialog {
 						if(randomTimer != null) {
 							view.findViewById(R.id.only_one_info).setVisibility(View.GONE);
 							view.findViewById(R.id.already_exists_info).setVisibility(View.VISIBLE);
-							bing_led_alarm_checkbox.setEnabled(false);
-							bing_led_alarm_checkbox.setColor(randomTimer.color);
-							bing_vibration_alarm_checkbox.setEnabled(false);
-							bing_vibration_alarm_checkbox.set_ms(randomTimer.vibration_ms);
-							bing_vibration_alarm_checkbox.set_strength(randomTimer.vibration_strength);
-							bing_log_battery_checkbox.setEnabled(false);
-							bing_log_battery_checkbox.setChecked(randomTimer.battery_logging);
+							ping_led_alarm_checkbox.setEnabled(false);
+							ping_led_alarm_checkbox.setColor(randomTimer.color);
+							ping_vibration_alarm_checkbox.setEnabled(false);
+							ping_vibration_alarm_checkbox.set_ms(randomTimer.vibration_ms);
+							ping_vibration_alarm_checkbox.set_strength(randomTimer.vibration_strength);
+							ping_log_battery_checkbox.setEnabled(false);
+							ping_log_battery_checkbox.setChecked(randomTimer.battery_logging);
 							random_input_min.setEnabled(false);
 							random_input_min.setText(Integer.toString(randomTimer.min));
 							random_input_timeframes.setEnabled(false);
@@ -120,24 +120,24 @@ public class Dialog_newBing extends Dialog {
 						
 					}
 					else {
-						view = inflater.inflate(R.layout.item_bing_dialog_new, container, false);
+						view = inflater.inflate(R.layout.item_ping_dialog_new, container, false);
 						
-						bing_led_alarm_checkbox = view.findViewById(R.id.led_alarm_checkbox);
-						bing_vibration_alarm_checkbox = view.findViewById(R.id.vibration_alarm_checkbox);
-						bing_log_battery_checkbox = view.findViewById(R.id.log_battery_checkbox);
-						bing_time_picker = view.findViewById(R.id.time_picker);
-						bing_time_picker.init(activity);
+						ping_led_alarm_checkbox = view.findViewById(R.id.led_alarm_checkbox);
+						ping_vibration_alarm_checkbox = view.findViewById(R.id.vibration_alarm_checkbox);
+						ping_log_battery_checkbox = view.findViewById(R.id.log_battery_checkbox);
+						ping_time_picker = view.findViewById(R.id.time_picker);
+						ping_time_picker.init(activity);
 						
 						if(isRandom) {
-							bing_led_alarm_checkbox.setVisibility(View.GONE);
-							bing_vibration_alarm_checkbox.setVisibility(View.GONE);
-							bing_log_battery_checkbox.setVisibility(View.GONE);
+							ping_led_alarm_checkbox.setVisibility(View.GONE);
+							ping_vibration_alarm_checkbox.setVisibility(View.GONE);
+							ping_log_battery_checkbox.setVisibility(View.GONE);
 						}
 					}
 					break;
 				case PAGE_REPEAT:
 					
-					view = inflater.inflate(R.layout.item_bing_dialog_set_repeat, container, false);
+					view = inflater.inflate(R.layout.item_ping_dialog_set_repeat, container, false);
 					
 					repeat_enable = view.findViewById(R.id.enable);
 					repeat_led_alarm_checkbox = view.findViewById(R.id.led_alarm_checkbox);
@@ -217,26 +217,26 @@ public class Dialog_newBing extends Dialog {
 		int last_page = 0;
 		@Override
 		public void onPageSelected(int position) {
-			if(last_page == PAGE_BING) {
+			if(last_page == PAGE_PING) {
 				if(isRandom) {
-					Calendar cal = bing_time_picker.date;
-					bing = new Bing(
+					Calendar cal = ping_time_picker.date;
+					ping = new Ping(
 							cal.get(Calendar.HOUR_OF_DAY),
 							cal.get(Calendar.MINUTE),
 							true,
 							false,
 							false,
 							false,
-							bing_led_alarm_checkbox.getColor(),
+							ping_led_alarm_checkbox.getColor(),
 							false,
-							bing_vibration_alarm_checkbox.get_strength(),
-							bing_vibration_alarm_checkbox.get_ms()
+							ping_vibration_alarm_checkbox.get_strength(),
+							ping_vibration_alarm_checkbox.get_ms()
 					);
 					
 					randomTimer = create_randomTimer();
 				}
 				else
-					bing = create_bing();
+					ping = create_ping();
 			}
 			else if(last_page == PAGE_REPEAT) {
 				repeat = logic.get_repeat();
@@ -244,7 +244,7 @@ public class Dialog_newBing extends Dialog {
 					repeat = create_repeat();
 			}
 			else {
-				bing = create_bing();
+				ping = create_ping();
 			}
 			
 			update_buttons(position);
@@ -304,12 +304,12 @@ public class Dialog_newBing extends Dialog {
 					min,
 					timeframes_num,
 					false,
-					bing_log_battery_checkbox.isChecked(),
-					bing_led_alarm_checkbox.isChecked(),
-					bing_led_alarm_checkbox.getColor(),
-					bing_vibration_alarm_checkbox.isChecked(),
-					bing_vibration_alarm_checkbox.get_strength(),
-					bing_vibration_alarm_checkbox.get_ms()
+					ping_log_battery_checkbox.isChecked(),
+					ping_led_alarm_checkbox.isChecked(),
+					ping_led_alarm_checkbox.getColor(),
+					ping_vibration_alarm_checkbox.isChecked(),
+					ping_vibration_alarm_checkbox.get_strength(),
+					ping_vibration_alarm_checkbox.get_ms()
 			);
 		}
 		Repeat create_repeat() {
@@ -331,19 +331,19 @@ public class Dialog_newBing extends Dialog {
 					repeat_vibration_alarm_checkbox.get_ms()
 			);
 		}
-		Bing create_bing() {
-			Calendar cal = bing_time_picker.date;
-			return new Bing(
+		Ping create_ping() {
+			Calendar cal = ping_time_picker.date;
+			return new Ping(
 					cal.get(Calendar.HOUR_OF_DAY),
 					cal.get(Calendar.MINUTE),
 					isRandom,
 					false,
-					bing_log_battery_checkbox.isChecked(),
-					bing_led_alarm_checkbox.isChecked(),
-					bing_led_alarm_checkbox.getColor(),
-					bing_vibration_alarm_checkbox.isChecked(),
-					bing_vibration_alarm_checkbox.get_strength(),
-					bing_vibration_alarm_checkbox.get_ms()
+					ping_log_battery_checkbox.isChecked(),
+					ping_led_alarm_checkbox.isChecked(),
+					ping_led_alarm_checkbox.getColor(),
+					ping_vibration_alarm_checkbox.isChecked(),
+					ping_vibration_alarm_checkbox.get_strength(),
+					ping_vibration_alarm_checkbox.get_ms()
 			);
 		}
 		
@@ -356,10 +356,10 @@ public class Dialog_newBing extends Dialog {
 		public Repeat get_repeat() {
 			return repeat;
 		}
-		public Bing get_bing() {
+		public Ping get_ping() {
 			if(!isRandom && repeat_enable != null && repeat_enable.isChecked())
-				bing.repeat = true;
-			return bing;
+				ping.repeat = true;
+			return ping;
 		}
 	}
 	
@@ -368,7 +368,7 @@ public class Dialog_newBing extends Dialog {
 	
 	private boolean isRandom;
 	
-	Dialog_newBing(boolean _isRandom, Activity _activity, Board_logic _logic) {
+	Dialog_newPing(boolean _isRandom, Activity _activity, Board_logic _logic) {
 		super(_activity);
 		activity = _activity;
 		logic = _logic;
@@ -376,7 +376,7 @@ public class Dialog_newBing extends Dialog {
 	}
 	
 	public interface OnFinishListener {
-		void onFinish(Bing bing);
+		void onFinish(Ping ping);
 	}
 	
 	
@@ -385,7 +385,7 @@ public class Dialog_newBing extends Dialog {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		setContentView(R.layout.dialog_new_bing);
+		setContentView(R.layout.dialog_new_ping);
 		getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		
 		Button btn_save = findViewById(R.id.btn_save);
@@ -414,8 +414,8 @@ public class Dialog_newBing extends Dialog {
 			else if(pos == count-1) {
 				adapter.onPageSelected(adapter.last_page); //to make sure that changes to the current page are saved
 				
-				Bing bing = adapter.get_bing();
-				Task<?> task_progress = (logic.get_repeat() == null && bing.repeat) ? logic.add_repeat(adapter.get_repeat()) : Task.forResult(null);
+				Ping ping = adapter.get_ping();
+				Task<?> task_progress = (logic.get_repeat() == null && ping.repeat) ? logic.add_repeat(adapter.get_repeat()) : Task.forResult(null);
 				
 				if(isRandom && logic.get_randomTimer() == null)
 					task_progress = task_progress.continueWithTask(task -> {
@@ -427,11 +427,11 @@ public class Dialog_newBing extends Dialog {
 				
 				task_progress.continueWithTask(task -> {
 					if(task.isFaulted()) {
-						logic.log(R.string.error_cancel_bing);
+						logic.log(R.string.error_cancel_ping);
 						return null;
 					}
 					
-					return logic.add_bing(bing);
+					return logic.add_ping(ping);
 				});
 				
 				dismiss();

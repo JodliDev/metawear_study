@@ -1,7 +1,6 @@
 package at.jodlidev.metawear.study;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.mbientlab.metawear.Data;
 import com.mbientlab.metawear.data.Acceleration;
@@ -21,7 +20,7 @@ public class Download_formatter {
 	static final int SWITCH_NUM = 0;
 	static final int SWITCH_LENGTH = 1;
 	static final int ACC = 2;
-	static final int BING_BATTERY = 3;
+	static final int PING_BATTERY = 3;
 	static final int UNKNOWN = 4;
 	static final int SWITCH_NUM_ACC_COMBINED = 5;
 	static final int SWITCH_LENGTH_ACC_COMBINED = 6;
@@ -29,12 +28,12 @@ public class Download_formatter {
 	static final String FILENAME_SWITCH_NUM = "btn_count";
 	static final String FILENAME_SWITCH_LENGTH = "btn_length";
 	static final String FILENAME_ACC = "acceleration";
-	static final String FILENAME_BING_BATTERY = "bing_battery";
+	static final String FILENAME_PING_BATTERY = "ping_battery";
 	static final String FILENAME_UNKNOWN = "unknown";
 	static final String FILENAME_SWITCH_NUM_ACC_COMBINED = "btn_count_acceleration";
 	static final String FILENAME_SWITCH_LENGTH_ACC_COMBINED = "btn_length_acceleration";
 	
-	static final String[] FILENAMES = {FILENAME_SWITCH_NUM, FILENAME_SWITCH_LENGTH, FILENAME_ACC, FILENAME_BING_BATTERY, FILENAME_UNKNOWN, FILENAME_SWITCH_NUM_ACC_COMBINED, FILENAME_SWITCH_LENGTH_ACC_COMBINED};
+	static final String[] FILENAMES = {FILENAME_SWITCH_NUM, FILENAME_SWITCH_LENGTH, FILENAME_ACC, FILENAME_PING_BATTERY, FILENAME_UNKNOWN, FILENAME_SWITCH_NUM_ACC_COMBINED, FILENAME_SWITCH_LENGTH_ACC_COMBINED};
 	
 	private Context context;
 	private int[] count = new int[FILENAMES.length];
@@ -332,7 +331,7 @@ public class Download_formatter {
 			case ACC:
 				s = format_acc_data(data);
 			break;
-			case BING_BATTERY:
+			case PING_BATTERY:
 				s = format_battery_data(data);
 			break;
 			default:
@@ -372,7 +371,7 @@ public class Download_formatter {
 				return default_start + "press_ms";
 			case ACC:
 				return default_start + "x_axis"+DELIMITER+"y_axis"+DELIMITER+"z_axis"+DELIMITER+"x_angle"+DELIMITER+"y_angle"+DELIMITER+"z_angle";
-			case BING_BATTERY:
+			case PING_BATTERY:
 				return default_start + "battery_percent"+DELIMITER+"battery_voltage";
 			case SWITCH_NUM_ACC_COMBINED:
 				return default_start

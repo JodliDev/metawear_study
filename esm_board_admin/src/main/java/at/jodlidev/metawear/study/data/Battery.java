@@ -15,7 +15,7 @@ public class Battery extends DataBox {
 	public static final String KEY_ROUTE_ID = "battery_route_id";
 	public static final String KEY_REACT_ROUTE_ID = "battery_react_route_id";
 	public static final String KEY_BATTERY_FOR_SWITCH = "battery_for_swtich";
-	public static final String KEY_BATTERY_FOR_BING = "battery_for_bing";
+	public static final String KEY_BATTERY_FOR_PING = "battery_for_bing";
 	public static final String KEY_LOW_THRESHOLD = "battery_low_threshold";
 	public static final String KEY_LOW_LED = "battery_low_led";
 	public static final String KEY_LOW_COLOR = "battery_low_color";
@@ -28,7 +28,7 @@ public class Battery extends DataBox {
 	public int battery_route_id = -1;
 	public int battery_react_route_id = -1;
 	public boolean battery_for_switch = false;
-	public boolean battery_for_bing = false;
+	public boolean battery_for_ping = false;
 	public int battery_low_threshold = 50;
 	public boolean battery_low_led = false;
 	public String battery_low_color = "RED";
@@ -44,7 +44,7 @@ public class Battery extends DataBox {
 		battery_route_id = c.getInt(4);
 		battery_react_route_id = c.getInt(5);
 		battery_for_switch = c.getInt(6) == 1;
-		battery_for_bing = c.getInt(7) == 1;
+		battery_for_ping = c.getInt(7) == 1;
 		battery_low_threshold = c.getInt(8);
 		battery_low_led = c.getInt(9) == 1;
 		battery_low_color = c.getString(10);
@@ -54,7 +54,7 @@ public class Battery extends DataBox {
 	}
 	
 	public Battery(boolean _battery_for_switch,
-				   boolean _battery_for_bing,
+				   boolean _battery_for_ping,
 				   int _battery_low_threshold,
 				   boolean _battery_low_led,
 				   String _battery_low_color,
@@ -63,7 +63,7 @@ public class Battery extends DataBox {
 				   short _battery_low_vibration_ms) {
 		
 		battery_for_switch = _battery_for_switch;
-		battery_for_bing = _battery_for_bing;
+		battery_for_ping = _battery_for_ping;
 		battery_low_threshold = _battery_low_threshold;
 		battery_low_led = _battery_low_led;
 		battery_low_color = _battery_low_color;
@@ -79,8 +79,8 @@ public class Battery extends DataBox {
 				case KEY_BATTERY_FOR_SWITCH:
 					battery_for_switch = reader.nextBoolean();
 					break;
-				case KEY_BATTERY_FOR_BING:
-					battery_for_bing = reader.nextBoolean();
+				case KEY_BATTERY_FOR_PING:
+					battery_for_ping = reader.nextBoolean();
 					break;
 				case KEY_LOW_THRESHOLD:
 					battery_low_threshold = reader.nextInt();
@@ -111,7 +111,7 @@ public class Battery extends DataBox {
 		values.put(KEY_ROUTE_ID, battery_route_id);
 		values.put(KEY_REACT_ROUTE_ID, battery_react_route_id);
 		values.put(KEY_BATTERY_FOR_SWITCH, battery_for_switch);
-		values.put(KEY_BATTERY_FOR_BING, battery_for_bing);
+		values.put(KEY_BATTERY_FOR_PING, battery_for_ping);
 		values.put(KEY_LOW_THRESHOLD, battery_low_threshold);
 		values.put(KEY_LOW_LED, battery_low_led);
 		values.put(KEY_LOW_COLOR, battery_low_color);
@@ -125,7 +125,7 @@ public class Battery extends DataBox {
 	public JSONObject export() throws JSONException {
 		JSONObject data = new JSONObject();
 		data.put(KEY_BATTERY_FOR_SWITCH, battery_for_switch);
-		data.put(KEY_BATTERY_FOR_BING, battery_for_bing);
+		data.put(KEY_BATTERY_FOR_PING, battery_for_ping);
 		data.put(KEY_LOW_THRESHOLD, battery_low_threshold);
 		data.put(KEY_LOW_LED, battery_low_led);
 		data.put(KEY_LOW_COLOR, battery_low_color);

@@ -18,7 +18,7 @@ public class Board_data {
 			Battery.KEY_ROUTE_ID,
 			Battery.KEY_REACT_ROUTE_ID,
 			Battery.KEY_BATTERY_FOR_SWITCH,
-			Battery.KEY_BATTERY_FOR_BING,
+			Battery.KEY_BATTERY_FOR_PING,
 			Battery.KEY_LOW_THRESHOLD,
 			Battery.KEY_LOW_LED,
 			Battery.KEY_LOW_COLOR,

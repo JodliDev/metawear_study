@@ -33,7 +33,7 @@
 	
 	
 			<at.jodlidev.metawear.study.Element_State_icons
-				android:id="@+id/bing_data"
+				android:id="@+id/ping_data"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginStart="40dp"

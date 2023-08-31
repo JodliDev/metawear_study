@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.jodlidev.metawear.study.data.Battery;
-import at.jodlidev.metawear.study.data.Bing;
+import at.jodlidev.metawear.study.data.Ping;
 import at.jodlidev.metawear.study.data.Board_data;
 import at.jodlidev.metawear.study.data.BootMacro;
 import at.jodlidev.metawear.study.data.ChargeFeedback;
@@ -71,7 +71,7 @@ public class SQLite extends SQLiteOpenHelper {
 				   Battery.KEY_BATTERY_FOR_SWITCH + " INTEGER, " +
 				   Battery.KEY_ROUTE_ID + " INTEGER DEFAULT -1, " +
 				   Battery.KEY_REACT_ROUTE_ID + " INTEGER DEFAULT -1, " +
-				   Battery.KEY_BATTERY_FOR_BING + " INTEGER, " +
+				   Battery.KEY_BATTERY_FOR_PING + " INTEGER, " +
 				   Battery.KEY_LOW_THRESHOLD + " INTEGER, " +
 				   Battery.KEY_LOW_LED + " INTEGER, " +
 				   Battery.KEY_LOW_COLOR + " TEXT, " +
@@ -108,24 +108,24 @@ public class SQLite extends SQLiteOpenHelper {
 				   Switch_route.KEY_EXISTS_ON_BOARD+" INTEGER DEFAULT 1, " +
 				   "FOREIGN KEY("+Switch_route.KEY_BOARD+") REFERENCES boards("+Board_data.KEY_ID+"))");
 		
-		db.execSQL("CREATE TABLE " + Bing.TABLE + " (" +
-				   Bing.KEY_ID+" INTEGER PRIMARY KEY, " +
-				   Bing.KEY_BOARD+" INTEGER, " +
-				   Bing.KEY_HOUR+" INTEGER, " +
-				   Bing.KEY_MIN+" INTEGER, " +
-				   Bing.KEY_REMOVE_WAIT_TIMESTAMP+" INTEGER, " +
-				   Bing.KEY_RANDOM+" INTEGER, " +
-				   Bing.KEY_REPEAT+" INTEGER, " +
-				   Bing.KEY_BATTERY_LOGGING+" INTEGER, " +
-				   Bing.KEY_LED+" INTEGER, " +
-				   Bing.KEY_COLOR+" TEXT, " +
-				   Bing.KEY_VIBRATION+" INTEGER, " +
-				   Bing.KEY_VIBRATION_STRENGTH+" INTEGER, " +
-				   Bing.KEY_VIBRATION_MS+" INTEGER, " +
-				   Bing.KEY_ID_WAIT+" INTEGER, " +
-				   Bing.KEY_ID_LOOP+" INTEGER, " +
-				   Bing.KEY_EXISTS_ON_BOARD+" INTEGER DEFAULT 1, " +
-				   "FOREIGN KEY("+Bing.KEY_BOARD+") REFERENCES boards("+Board_data.KEY_ID+"))");
+		db.execSQL("CREATE TABLE " + Ping.TABLE + " (" +
+				   Ping.KEY_ID + " INTEGER PRIMARY KEY, " +
+				   Ping.KEY_BOARD + " INTEGER, " +
+				   Ping.KEY_HOUR + " INTEGER, " +
+				   Ping.KEY_MIN + " INTEGER, " +
+				   Ping.KEY_REMOVE_WAIT_TIMESTAMP + " INTEGER, " +
+				   Ping.KEY_RANDOM + " INTEGER, " +
+				   Ping.KEY_REPEAT + " INTEGER, " +
+				   Ping.KEY_BATTERY_LOGGING + " INTEGER, " +
+				   Ping.KEY_LED + " INTEGER, " +
+				   Ping.KEY_COLOR + " TEXT, " +
+				   Ping.KEY_VIBRATION + " INTEGER, " +
+				   Ping.KEY_VIBRATION_STRENGTH + " INTEGER, " +
+				   Ping.KEY_VIBRATION_MS + " INTEGER, " +
+				   Ping.KEY_ID_WAIT + " INTEGER, " +
+				   Ping.KEY_ID_LOOP + " INTEGER, " +
+				   Ping.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1, " +
+				   "FOREIGN KEY(" + Ping.KEY_BOARD + ") REFERENCES boards(" + Board_data.KEY_ID + "))");
 		
 		db.execSQL("CREATE TABLE "+Repeat.TABLE+" (" +
 				   Repeat.KEY_BOARD+" INTEGER PRIMARY KEY, " +
@@ -253,7 +253,7 @@ public class SQLite extends SQLiteOpenHelper {
 				db.execSQL("ALTER TABLE " + Switch_route.TABLE + " ADD COLUMN " + Switch_route.KEY_SWITCH_LOG_TIMESTAMP + " INTEGER;");
 				db.execSQL("ALTER TABLE " + Switch_route.TABLE + " ADD COLUMN " + Switch_route.KEY_ACC_LOG_TIMESTAMP + " INTEGER;");
 				db.execSQL("ALTER TABLE " + Switch_route.TABLE + " ADD COLUMN " + Switch_route.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1;");
-				db.execSQL("ALTER TABLE " + Bing.TABLE + " ADD COLUMN " + Bing.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1;");
+				db.execSQL("ALTER TABLE " + Ping.TABLE + " ADD COLUMN " + Ping.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1;");
 				db.execSQL("ALTER TABLE " + Repeat.TABLE + " ADD COLUMN " + Repeat.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1;");
 				db.execSQL("ALTER TABLE " + RandomTimer.TABLE + " ADD COLUMN " + RandomTimer.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1;");
 				db.execSQL("ALTER TABLE " + ChargeFeedback.TABLE + " ADD COLUMN " + ChargeFeedback.KEY_EXISTS_ON_BOARD + " INTEGER DEFAULT 1;");
@@ -266,7 +266,7 @@ public class SQLite extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS "+Serialized_Boards.TABLE);
 		db.execSQL("DROP TABLE IF EXISTS "+Board_data.TABLE);
 		db.execSQL("DROP TABLE IF EXISTS "+Switch_route.TABLE);
-		db.execSQL("DROP TABLE IF EXISTS "+Bing.TABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + Ping.TABLE);
 		db.execSQL("DROP TABLE IF EXISTS "+Repeat.TABLE);
 		db.execSQL("DROP TABLE IF EXISTS "+RandomTimer.TABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + BootMacro.TABLE);
@@ -337,7 +337,7 @@ public class SQLite extends SQLiteOpenHelper {
 		String board_id = Long.toString(board_data.sql_id);
 		SQLiteDatabase db = getWritableDatabase();
 		db.delete(Switch_route.TABLE, Switch_route.KEY_BOARD+" = ?", new String[] {board_id});
-		db.delete(Bing.TABLE, Bing.KEY_BOARD+" = ?", new String[] {board_id});
+		db.delete(Ping.TABLE, Ping.KEY_BOARD + " = ?", new String[] {board_id});
 		db.delete(Repeat.TABLE, Repeat.KEY_BOARD+" = ?", new String[] {board_id});
 		db.delete(RandomTimer.TABLE, RandomTimer.KEY_BOARD+" = ?", new String[] {board_id});
 		db.delete(Serialized_Boards.TABLE, RandomTimer.KEY_BOARD+" = ?", new String[] {board_id});
@@ -387,7 +387,7 @@ public class SQLite extends SQLiteOpenHelper {
 			//Order:
 			//Battery first because it is needed everywhere
 			//repeat before switch and random
-			//bings after repeat and random
+			//pings after repeat and random
 			//Macro after switch and battery
 			
 			//battery
@@ -405,14 +405,14 @@ public class SQLite extends SQLiteOpenHelper {
 			Switch_route switch_route = get_switch_route(board_data);
 			r.put(Switch_route.TABLE, switch_route != null ? switch_route.export() : null);
 			
-			//bings
-			List<Bing> bings = get_bings(board_data);
+			//pings
+			List<Ping> pings = get_pings(board_data);
 			
-			JSONArray bing_array = new JSONArray();
-			for(Bing bing : bings) {
-				bing_array.put(bing.export());
+			JSONArray ping_array = new JSONArray();
+			for(Ping ping : pings) {
+				ping_array.put(ping.export());
 			}
-			r.put(Bing.TABLE, bing_array);
+			r.put(Ping.TABLE, ping_array);
 			
 			//bootMacro
 			BootMacro bootMacro = get_bootMacro(board_data);
@@ -439,11 +439,11 @@ public class SQLite extends SQLiteOpenHelper {
 			switch_route.set_to_not_exist(board_data, db);
 		}
 		
-		List<Bing> bings = get_bings(board_data);
-		if(bings.size() != 0) {
-			for(Bing bing : bings) {
-				bing.set_to_not_exist(board_data, db);
-				}
+		List<Ping> pings = get_pings(board_data);
+		if(pings.size() != 0) {
+			for(Ping ping : pings) {
+				ping.set_to_not_exist(board_data, db);
+			}
 		}
 		
 		Repeat repeat = get_repeat(board_data);
@@ -594,59 +594,59 @@ public class SQLite extends SQLiteOpenHelper {
 	
 	
 	//*****
-	//Bing
+	//Ping
 	//*****
-	public void add_bing(Board_data board_data, Bing bing) {
-		bing.save(board_data, getWritableDatabase());
+	public void add_ping(Board_data board_data, Ping ping) {
+		ping.save(board_data, getWritableDatabase());
 	}
-	void update_wait(Bing bing) {
+	void update_wait(Ping ping) {
 		ContentValues values = new ContentValues();
-		values.put(Bing.KEY_ID_WAIT, bing.id_wait);
-		bing.sqlId = getWritableDatabase().update(Bing.TABLE, values, Bing.KEY_ID+" = ?", new String[] {Long.toString(bing.sqlId)});
+		values.put(Ping.KEY_ID_WAIT, ping.id_wait);
+		ping.sqlId = getWritableDatabase().update(Ping.TABLE, values, Ping.KEY_ID + " = ?", new String[] {Long.toString(ping.sqlId)});
 	}
 	
-	List<Bing> get_bings(Board_data board_data) {
-		Cursor c = getWritableDatabase().query(Bing.TABLE,
-				Bing.COLUMNS,
-				Bing.KEY_BOARD+" = ?",
+	List<Ping> get_pings(Board_data board_data) {
+		Cursor c = getWritableDatabase().query(Ping.TABLE,
+				Ping.COLUMNS,
+				Ping.KEY_BOARD + " = ?",
 				new String[] {Long.toString(board_data.sql_id)},
 				null,
 				null,
 				null,
 				null);
 		
-		List<Bing> r = new ArrayList<>();
+		List<Ping> r = new ArrayList<>();
 		if(c.moveToFirst()) {
 			do {
-				r.add(new Bing(c));
+				r.add(new Ping(c));
 			}
 			while(c.moveToNext());
 		}
 		c.close();
 		return r;
 	}
-	List<Bing> get_bings_with(Board_data board_data, String column, boolean value) {
-		Cursor c = getWritableDatabase().query(Bing.TABLE,
-				Bing.COLUMNS,
-				Bing.KEY_BOARD+" = ? AND "+column+" = ?",
+	List<Ping> get_pings_with(Board_data board_data, String column, boolean value) {
+		Cursor c = getWritableDatabase().query(Ping.TABLE,
+				Ping.COLUMNS,
+				Ping.KEY_BOARD + " = ? AND " + column + " = ?",
 				new String[] {Long.toString(board_data.sql_id), value ? "1" : "0"},
 				null,
 				null,
 				null,
 				null);
 		
-		List<Bing> r = new ArrayList<>();
+		List<Ping> r = new ArrayList<>();
 		if(c.moveToFirst()) {
 			do {
-				r.add(new Bing(c));
+				r.add(new Ping(c));
 			}
 			while(c.moveToNext());
 		}
 		return r;
 	}
 	
-	void remove_bing(Bing bing) {
-		getWritableDatabase().delete(Bing.TABLE, Bing.KEY_ID+" = ?", new String[] {Long.toString(bing.sqlId)});
+	void remove_ping(Ping ping) {
+		getWritableDatabase().delete(Ping.TABLE, Ping.KEY_ID + " = ?", new String[] {Long.toString(ping.sqlId)});
 	}
 	
 	

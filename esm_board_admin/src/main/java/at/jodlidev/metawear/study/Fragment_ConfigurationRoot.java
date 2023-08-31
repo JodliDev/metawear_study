@@ -29,8 +29,8 @@ public class Fragment_ConfigurationRoot extends FragmentBase {
 		public Fragment getItem(int i) {
 			FragmentBase fragment;
 			switch(i) {
-				case SITE_BING:
-					fragment = new Fragment_Bing();
+				case SITE_PING:
+					fragment = new Fragment_Ping();
 					break;
 				case SITE_SWITCH:
 					fragment = new Fragment_Switch();
@@ -56,8 +56,8 @@ public class Fragment_ConfigurationRoot extends FragmentBase {
 				return "ERROR";
 			
 			switch(i) {
-				case SITE_BING:
-					return res.getString(R.string.bing);
+				case SITE_PING:
+					return res.getString(R.string.ping);
 				case SITE_SWITCH:
 					return res.getString(R.string.switch_feedback);
 				case SITE_MACRO:
@@ -67,7 +67,7 @@ public class Fragment_ConfigurationRoot extends FragmentBase {
 			}
 		}
 	}
-	private final static int SITE_BING = 0;
+	private final static int SITE_PING = 0;
 	private final static int SITE_SWITCH = 1;
 	private final static int SITE_MACRO = 2;
 
@@ -89,9 +89,9 @@ public class Fragment_ConfigurationRoot extends FragmentBase {
 		Fragment_Switch f_switch = (Fragment_Switch) get_fragment(SITE_SWITCH);
 		if(f_switch != null)
 			f_switch.update_ui();
-		Fragment_Bing f_bing = (Fragment_Bing) get_fragment(SITE_BING);
-		if(f_bing != null)
-			f_bing.update_ui();
+		Fragment_Ping f_ping = (Fragment_Ping) get_fragment(SITE_PING);
+		if(f_ping != null)
+			f_ping.update_ui();
 		Fragment_BatteryOptions f_macro = (Fragment_BatteryOptions) get_fragment(SITE_MACRO);
 		if(f_macro != null)
 			f_macro.update_ui();

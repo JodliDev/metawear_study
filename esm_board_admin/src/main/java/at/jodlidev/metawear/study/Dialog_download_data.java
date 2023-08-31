@@ -6,12 +6,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.TextView;
-
-import java.util.List;
 
 import at.jodlidev.metawear.study.data.Battery;
-import at.jodlidev.metawear.study.data.Bing;
 import at.jodlidev.metawear.study.data.Switch_route;
 
 /**
@@ -50,7 +46,7 @@ public class Dialog_download_data extends Dialog implements View.OnClickListener
 		
 		Switch_route switch_route = logic.get_switch_route();
 		Battery battery = logic.get_battery();
-		if(switch_route != null && battery != null && (switch_route.log_acc_data || switch_route.log_switch_data != Switch_route.LOG_SWITCH_NONE || battery.battery_for_bing)) {
+		if(switch_route != null && battery != null && (switch_route.log_acc_data || switch_route.log_switch_data != Switch_route.LOG_SWITCH_NONE || battery.battery_for_ping)) {
 			if(switch_route.log_acc_data &&  switch_route.log_switch_data != Switch_route.LOG_SWITCH_NONE) {
 				switch_acc_combined.setVisibility(View.VISIBLE);
 				switch_acc_combined.setChecked(true);

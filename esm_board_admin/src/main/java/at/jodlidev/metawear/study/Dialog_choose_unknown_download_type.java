@@ -25,7 +25,7 @@ public class Dialog_choose_unknown_download_type extends Dialog implements View.
 	private RadioButton acceleration;
 	private RadioButton length_of_click;
 	private RadioButton number_of_clicks;
-	private RadioButton bing_battery;
+	private RadioButton ping_battery;
 	private RadioButton unknown;
 	
 	Dialog_choose_unknown_download_type(Activity _activity, String identifier, OnFinishListener listener, Data _data) {
@@ -56,7 +56,7 @@ public class Dialog_choose_unknown_download_type extends Dialog implements View.
 		acceleration = findViewById(R.id.acceleration);
 		length_of_click = findViewById(R.id.length_of_click);
 		number_of_clicks = findViewById(R.id.number_of_clicks);
-		bing_battery = findViewById(R.id.bing_battery);
+		ping_battery = findViewById(R.id.ping_battery);
 		unknown = findViewById(R.id.unknown);
 		
 		((TextView) findViewById(R.id.identifier_text)).setText(identifier);
@@ -68,7 +68,7 @@ public class Dialog_choose_unknown_download_type extends Dialog implements View.
 			acceleration.setEnabled(false);
 			length_of_click.setEnabled(false);
 			number_of_clicks.setEnabled(false);
-			bing_battery.setEnabled(false);
+			ping_battery.setEnabled(false);
 			
 			for(Class<?> type : types) {
 				if(type.equals(Acceleration.class))
@@ -78,7 +78,7 @@ public class Dialog_choose_unknown_download_type extends Dialog implements View.
 					number_of_clicks.setEnabled(true);
 				}
 				else if(type.equals(Settings.BatteryState.class))
-					bing_battery.setEnabled(true);
+					ping_battery.setEnabled(true);
 			}
 		}
 		
@@ -101,8 +101,8 @@ public class Dialog_choose_unknown_download_type extends Dialog implements View.
 					case R.id.acceleration:
 						type = Download_formatter.ACC;
 						break;
-					case R.id.bing_battery:
-						type = Download_formatter.BING_BATTERY;
+					case R.id.ping_battery:
+						type = Download_formatter.PING_BATTERY;
 						break;
 					case R.id.unknown:
 						type = Download_formatter.UNKNOWN;

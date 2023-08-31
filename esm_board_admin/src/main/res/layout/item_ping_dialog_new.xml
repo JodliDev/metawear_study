@@ -16,8 +16,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="15dp"
-			android:drawableStart="@drawable/ic_bing_black"
-			android:text="@string/add_fixed_bing"
+			android:drawableStart="@drawable/ic_ping_black"
+			android:text="@string/add_fixed_ping"
 			android:textColor="@android:color/black"
 			android:textSize="20sp"/>
 		

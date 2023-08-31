@@ -17,7 +17,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="15dp"
 			android:drawableStart="@drawable/ic_random_black"
-			android:text="@string/add_random_bing"
+			android:text="@string/add_random_ping"
 			android:textColor="@android:color/black"
 			android:textSize="20sp"/>
 		

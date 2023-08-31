@@ -4,27 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.JsonReader;
-import android.util.JsonToken;
-
 
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import androidx.fragment.app.Fragment;
-import at.jodlidev.metawear.study.data.Battery;
-import at.jodlidev.metawear.study.data.Bing;
-import at.jodlidev.metawear.study.data.BootMacro;
-import at.jodlidev.metawear.study.data.DataBox;
-import at.jodlidev.metawear.study.data.RandomTimer;
-import at.jodlidev.metawear.study.data.Repeat;
-import at.jodlidev.metawear.study.data.Switch_route;
 
 /**
  * Created by JodliDev on 15.03.2019.

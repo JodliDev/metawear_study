@@ -11,28 +11,24 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.mbientlab.metawear.Route;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import at.jodlidev.metawear.study.data.Bing;
+import at.jodlidev.metawear.study.data.Ping;
 import at.jodlidev.metawear.study.data.RandomTimer;
 import at.jodlidev.metawear.study.data.Repeat;
-import bolts.Task;
 
 /**
  * Created by JodliDev on 21.03.18.
  */
 
-public class Fragment_Bing extends FragmentBase implements View.OnClickListener {
+public class Fragment_Ping extends FragmentBase implements View.OnClickListener {
 	
-	private List<Bing> bing_dates = new ArrayList<>();
+	private List<Ping> ping_dates = new ArrayList<>();
 	
-	private LinearLayout bing_collection;
+	private LinearLayout ping_collection;
 	private View repeat_box;
 	private FrameLayout repeat_disable_overlay;
 	private View random_box;
@@ -42,12 +38,12 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 	
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		init();
-		return inflater.inflate(R.layout.fragment_bing, container, false);
+		return inflater.inflate(R.layout.fragment_ping, container, false);
 	}
 	
 	@Override
 	public void onViewCreated(@NonNull View rootView, Bundle savedInstanceState) {
-		bing_collection = rootView.findViewById(R.id.bing_list);
+		ping_collection = rootView.findViewById(R.id.ping_list);
 		repeat_box = rootView.findViewById(R.id.repeat_box);
 		repeat_disable_overlay = rootView.findViewById(R.id.repeat_disable_overlay);
 		random_box = rootView.findViewById(R.id.random_box);
@@ -57,8 +53,8 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 		
 		repeat_box.setOnClickListener(this);
 		random_box.setOnClickListener(this);
-		rootView.findViewById(R.id.btn_add_bing).setOnClickListener(this);
-		rootView.findViewById(R.id.btn_add_random_bing).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_add_ping).setOnClickListener(this);
+		rootView.findViewById(R.id.btn_add_random_ping).setOnClickListener(this);
 		
 		
 		update_ui();
@@ -88,11 +84,11 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 							logic.remove_random();
 						}).show();
 				break;
-			case R.id.btn_add_bing:
-				(new Dialog_newBing(false, getActivity(), logic)).show();
+			case R.id.btn_add_ping:
+				(new Dialog_newPing(false, getActivity(), logic)).show();
 				break;
-			case R.id.btn_add_random_bing:
-				(new Dialog_newBing(true, getActivity(), logic)).show();
+			case R.id.btn_add_random_ping:
+				(new Dialog_newPing(true, getActivity(), logic)).show();
 				break;
 		}
 	}
@@ -103,11 +99,11 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 			return;
 		
 		getActivity().runOnUiThread(() -> {
-			bing_collection.removeAllViews();
-			List<Bing> bings = logic.get_bings();
-			if(bings != null) {
-				for(Bing r : bings) {
-					show_bing(r);
+			ping_collection.removeAllViews();
+			List<Ping> pings = logic.get_pings();
+			if(pings != null) {
+				for(Ping r : pings) {
+					show_ping(r);
 				}
 			}
 			
@@ -149,31 +145,31 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 	}
 	
 	//*****
-	//Bing
+	//Ping
 	//*****
-	void show_bing(Bing bing) {
+	void show_ping(Ping ping) {
 		//TODO: This code is outdated! Use a RecyclerView instead!
 		
 		LayoutInflater inflater = LayoutInflater.from(getContext());
-		FrameLayout view = (FrameLayout) inflater.inflate(R.layout.item_bing_list, null);
-		bing.view = view;
+		FrameLayout view = (FrameLayout) inflater.inflate(R.layout.item_ping_list, null);
+		ping.view = view;
 		
-		if(!bing.exists_on_board)
+		if(!ping.exists_on_board)
 			view.setForeground(getResources().getDrawable(R.drawable.disabled_overlay));
 		
-		Element_State_icons state = view.findViewById(R.id.bing_data);
+		Element_State_icons state = view.findViewById(R.id.ping_data);
 		
 		int random_min = 0;
-		if(bing.random) {
+		if(ping.random) {
 			RandomTimer randomTimer = logic.get_randomTimer();
 			random_min = randomTimer.min;
 		}
-		state.show_data(bing.hour, bing.min, random_min, bing.repeat, bing.battery_logging, bing.led, bing.color, bing.vibration);
+		state.show_data(ping.hour, ping.min, random_min, ping.repeat, ping.battery_logging, ping.led, ping.color, ping.vibration);
 		
 		TextView state_text = view.findViewById(R.id.state_text);
 		ImageView state_icon = view.findViewById(R.id.state_icon);
 		
-		if(bing.id_wait == -1) {
+		if(ping.id_wait == -1) {
 			state_text.setText(R.string.state_started);
 			state_text.setTextColor(getResources().getColor(R.color.green));
 			state_icon.setImageResource(R.drawable.ic_play_black);
@@ -185,42 +181,42 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 			state_icon.setImageResource(R.drawable.ic_schedule_black);
 			state_icon.setColorFilter(getResources().getColor(R.color.orange));
 			
-			if(bing.timer == null) {
-				bing.timer = new Handler();
-				bing.timer.postDelayed(() -> logic.remove_waitingTimer(bing), bing.countdown + 10000); //add 10 seconds just to be safe
+			if(ping.timer == null) {
+				ping.timer = new Handler();
+				ping.timer.postDelayed(() -> logic.remove_waitingTimer(ping), ping.countdown + 10000); //add 10 seconds just to be safe
 			}
 		}
 		
 		view.findViewById(R.id.btn_delete).setOnClickListener((View v) -> {
-			logic.remove_bing(bing);
+			logic.remove_ping(ping);
 		});
 		
-		getActivity().runOnUiThread(() -> bing_collection.addView(view, 0));
+		getActivity().runOnUiThread(() -> ping_collection.addView(view, 0));
 		
-		bing_dates.add(bing);
+		ping_dates.add(ping);
 	}
 	
-	void unshow_bing(Bing bing) {
-		bing.removeTimer();
-		if(bing.view != null) {
-			bing_collection.removeView(bing.view);
-			bing.view = null;
+	void unshow_ping(Ping ping) {
+		ping.removeTimer();
+		if(ping.view != null) {
+			ping_collection.removeView(ping.view);
+			ping.view = null;
 		}
-		bing_dates.remove(bing);
+		ping_dates.remove(ping);
 	}
 	
-	private void empty_bing_list() {
-		for(int i = bing_dates.size() - 1; i >= 0; --i) { //it is possible that entries will get removed - so we need to iterate from the end
-			unshow_bing(bing_dates.get(i));
+	private void empty_ping_list() {
+		for(int i = ping_dates.size() - 1; i >= 0; --i) { //it is possible that entries will get removed - so we need to iterate from the end
+			unshow_ping(ping_dates.get(i));
 		}
-//		for(Bing r : bing_dates) {
-//			unshow_bing(r);
+//		for(Ping r : ping_dates) {
+//			unshow_ping(r);
 //		}
 	}
 	
-	void remove_waitingTimer(Bing bing) {
-		TextView state_text = bing.view.findViewById(R.id.state_text);
-		ImageView state_icon = bing.view.findViewById(R.id.state_icon);
+	void remove_waitingTimer(Ping ping) {
+		TextView state_text = ping.view.findViewById(R.id.state_text);
+		ImageView state_icon = ping.view.findViewById(R.id.state_icon);
 		
 		state_text.setText(R.string.state_started);
 		state_text.setTextColor(getResources().getColor(R.color.green));
@@ -233,9 +229,9 @@ public class Fragment_Bing extends FragmentBase implements View.OnClickListener 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		empty_bing_list();
+		empty_ping_list();
 		
-		bing_collection = null;
+		ping_collection = null;
 		repeat_box = null;
 		repeat_disable_overlay = null;
 		random_box = null;
